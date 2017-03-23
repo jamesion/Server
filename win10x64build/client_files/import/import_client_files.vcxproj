@@ -1,0 +1,347 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|x64">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|x64">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGUID>{480DEE86-BB0F-3BEF-8F4F-0AF7C580385A}</ProjectGUID>
+    <WindowsTargetPlatformVersion>10.0.14393.0</WindowsTargetPlatformVersion>
+    <Keyword>Win32Proj</Keyword>
+    <Platform>x64</Platform>
+    <ProjectName>import_client_files</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+    <PropertyGroup>
+      <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+      <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\jamesion\Source\eqemu\win10x64build\bin\Debug\</OutDir>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">import_client_files.dir\Debug\</IntDir>
+      <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">import_client_files</TargetName>
+      <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.exe</TargetExt>
+      <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</LinkIncremental>
+      <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</GenerateManifest>
+      <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\jamesion\Source\eqemu\win10x64build\bin\Release\</OutDir>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">import_client_files.dir\Release\</IntDir>
+      <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">import_client_files</TargetName>
+      <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.exe</TargetExt>
+      <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkIncremental>
+      <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</GenerateManifest>
+      <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\jamesion\Source\eqemu\win10x64build\bin\MinSizeRel\</OutDir>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">import_client_files.dir\MinSizeRel\</IntDir>
+      <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">import_client_files</TargetName>
+      <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">.exe</TargetExt>
+      <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkIncremental>
+      <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">true</GenerateManifest>
+      <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\jamesion\Source\eqemu\win10x64build\bin\RelWithDebInfo\</OutDir>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">import_client_files.dir\RelWithDebInfo\</IntDir>
+      <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">import_client_files</TargetName>
+      <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.exe</TargetExt>
+      <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">true</LinkIncremental>
+      <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">true</GenerateManifest>
+    </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Perl64\lib\CORE;C:\Users\jamesion\Source\eqemu\dependencies\luaj_x64\src;C:\Users\jamesion\Source\eqemu\dependencies\boost;C:\Users\jamesion\Source\eqemu\luabind;C:\Users\jamesion\Source\eqemu\dependencies\zlib_x64\include;C:\Users\jamesion\Source\eqemu\dependencies\mysql_x64\include;C:\Users\jamesion\Source\eqemu\common\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>Debug/</AssemblerListingLocation>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_WINDOWS;WIN64;_CRT_SECURE_NO_WARNINGS;CRASH_LOGGING;NOMINMAX;COMMANDS_LOGGING;DISABLE_LOGSYS;BOTS;EMBPERL;EMBPERL_PLUGIN;LUA_EQEMU;EQDEBUG=5;INVERSEXY;FIELD_ITEMS;MAP_DIR="./Maps";RATEBASE=1048576;DECAYBASE=78642;RETRANSMIT_TIMEOUT_MULT=3.0;RETRANSMIT_TIMEOUT_MAX=5000;AVERAGE_DELTA_MAX=2500;LOG_LEVEL_STATUS=2;LOG_LEVEL_NORMAL=3;LOG_LEVEL_ERROR=2;LOG_LEVEL_DEBUG=3;LOG_LEVEL_QUEST=2;LOG_LEVEL_COMMANDS=1;LOG_LEVEL_CRASH=3;GLM_FORCE_RADIANS;RETRANSMIT_ACKED_PACKETS=true;SANITIZE_LUA_LIBS;CMAKE_INTDIR="Debug";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_WINDOWS;WIN64;_CRT_SECURE_NO_WARNINGS;CRASH_LOGGING;NOMINMAX;COMMANDS_LOGGING;DISABLE_LOGSYS;BOTS;EMBPERL;EMBPERL_PLUGIN;LUA_EQEMU;EQDEBUG=5;INVERSEXY;FIELD_ITEMS;MAP_DIR=\"./Maps\";RATEBASE=1048576;DECAYBASE=78642;RETRANSMIT_TIMEOUT_MULT=3.0;RETRANSMIT_TIMEOUT_MAX=5000;AVERAGE_DELTA_MAX=2500;LOG_LEVEL_STATUS=2;LOG_LEVEL_NORMAL=3;LOG_LEVEL_ERROR=2;LOG_LEVEL_DEBUG=3;LOG_LEVEL_QUEST=2;LOG_LEVEL_COMMANDS=1;LOG_LEVEL_CRASH=3;GLM_FORCE_RADIANS;RETRANSMIT_ACKED_PACKETS=true;SANITIZE_LUA_LIBS;CMAKE_INTDIR=\"Debug\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Perl64\lib\CORE;C:\Users\jamesion\Source\eqemu\dependencies\luaj_x64\src;C:\Users\jamesion\Source\eqemu\dependencies\boost;C:\Users\jamesion\Source\eqemu\luabind;C:\Users\jamesion\Source\eqemu\dependencies\zlib_x64\include;C:\Users\jamesion\Source\eqemu\dependencies\mysql_x64\include;C:\Users\jamesion\Source\eqemu\common\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Perl64\lib\CORE;C:\Users\jamesion\Source\eqemu\dependencies\luaj_x64\src;C:\Users\jamesion\Source\eqemu\dependencies\boost;C:\Users\jamesion\Source\eqemu\luabind;C:\Users\jamesion\Source\eqemu\dependencies\zlib_x64\include;C:\Users\jamesion\Source\eqemu\dependencies\mysql_x64\include;C:\Users\jamesion\Source\eqemu\common\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalOptions>%(AdditionalOptions)  /machine:x64</AdditionalOptions>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;..\..\bin\Debug\common.lib;..\..\..\dependencies\mysql_x64\lib\mysqlclient.lib;..\..\..\dependencies\zlib_x64\lib\zlib.lib;Ws2_32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>Debug</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
+      <ImportLibrary>C:/Users/jamesion/Source/eqemu/win10x64build/bin/Debug/import_client_files.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/Users/jamesion/Source/eqemu/win10x64build/bin/Debug/import_client_files.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+      <Version></Version>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Perl64\lib\CORE;C:\Users\jamesion\Source\eqemu\dependencies\luaj_x64\src;C:\Users\jamesion\Source\eqemu\dependencies\boost;C:\Users\jamesion\Source\eqemu\luabind;C:\Users\jamesion\Source\eqemu\dependencies\zlib_x64\include;C:\Users\jamesion\Source\eqemu\dependencies\mysql_x64\include;C:\Users\jamesion\Source\eqemu\common\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>Release/</AssemblerListingLocation>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;_WINDOWS;WIN64;_CRT_SECURE_NO_WARNINGS;CRASH_LOGGING;NOMINMAX;COMMANDS_LOGGING;DISABLE_LOGSYS;BOTS;EMBPERL;EMBPERL_PLUGIN;LUA_EQEMU;EQDEBUG=5;INVERSEXY;FIELD_ITEMS;MAP_DIR="./Maps";RATEBASE=1048576;DECAYBASE=78642;RETRANSMIT_TIMEOUT_MULT=3.0;RETRANSMIT_TIMEOUT_MAX=5000;AVERAGE_DELTA_MAX=2500;LOG_LEVEL_STATUS=2;LOG_LEVEL_NORMAL=3;LOG_LEVEL_ERROR=2;LOG_LEVEL_DEBUG=3;LOG_LEVEL_QUEST=2;LOG_LEVEL_COMMANDS=1;LOG_LEVEL_CRASH=3;GLM_FORCE_RADIANS;RETRANSMIT_ACKED_PACKETS=true;SANITIZE_LUA_LIBS;CMAKE_INTDIR="Release";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat></DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;_WINDOWS;WIN64;_CRT_SECURE_NO_WARNINGS;CRASH_LOGGING;NOMINMAX;COMMANDS_LOGGING;DISABLE_LOGSYS;BOTS;EMBPERL;EMBPERL_PLUGIN;LUA_EQEMU;EQDEBUG=5;INVERSEXY;FIELD_ITEMS;MAP_DIR=\"./Maps\";RATEBASE=1048576;DECAYBASE=78642;RETRANSMIT_TIMEOUT_MULT=3.0;RETRANSMIT_TIMEOUT_MAX=5000;AVERAGE_DELTA_MAX=2500;LOG_LEVEL_STATUS=2;LOG_LEVEL_NORMAL=3;LOG_LEVEL_ERROR=2;LOG_LEVEL_DEBUG=3;LOG_LEVEL_QUEST=2;LOG_LEVEL_COMMANDS=1;LOG_LEVEL_CRASH=3;GLM_FORCE_RADIANS;RETRANSMIT_ACKED_PACKETS=true;SANITIZE_LUA_LIBS;CMAKE_INTDIR=\"Release\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Perl64\lib\CORE;C:\Users\jamesion\Source\eqemu\dependencies\luaj_x64\src;C:\Users\jamesion\Source\eqemu\dependencies\boost;C:\Users\jamesion\Source\eqemu\luabind;C:\Users\jamesion\Source\eqemu\dependencies\zlib_x64\include;C:\Users\jamesion\Source\eqemu\dependencies\mysql_x64\include;C:\Users\jamesion\Source\eqemu\common\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Perl64\lib\CORE;C:\Users\jamesion\Source\eqemu\dependencies\luaj_x64\src;C:\Users\jamesion\Source\eqemu\dependencies\boost;C:\Users\jamesion\Source\eqemu\luabind;C:\Users\jamesion\Source\eqemu\dependencies\zlib_x64\include;C:\Users\jamesion\Source\eqemu\dependencies\mysql_x64\include;C:\Users\jamesion\Source\eqemu\common\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalOptions>%(AdditionalOptions)  /machine:x64</AdditionalOptions>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;..\..\bin\Release\common.lib;..\..\..\dependencies\mysql_x64\lib\mysqlclient.lib;..\..\..\dependencies\zlib_x64\lib\zlib.lib;Ws2_32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <GenerateDebugInformation>No</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
+      <ImportLibrary>C:/Users/jamesion/Source/eqemu/win10x64build/bin/Release/import_client_files.lib</ImportLibrary>
+      <OptimizeReferences>true</OptimizeReferences>
+      <ProgramDataBaseFile>C:/Users/jamesion/Source/eqemu/win10x64build/bin/Release/import_client_files.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+      <Version></Version>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Perl64\lib\CORE;C:\Users\jamesion\Source\eqemu\dependencies\luaj_x64\src;C:\Users\jamesion\Source\eqemu\dependencies\boost;C:\Users\jamesion\Source\eqemu\luabind;C:\Users\jamesion\Source\eqemu\dependencies\zlib_x64\include;C:\Users\jamesion\Source\eqemu\dependencies\mysql_x64\include;C:\Users\jamesion\Source\eqemu\common\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>MinSizeRel/</AssemblerListingLocation>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>MinSpace</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;_WINDOWS;WIN64;_CRT_SECURE_NO_WARNINGS;CRASH_LOGGING;NOMINMAX;COMMANDS_LOGGING;DISABLE_LOGSYS;BOTS;EMBPERL;EMBPERL_PLUGIN;LUA_EQEMU;EQDEBUG=5;INVERSEXY;FIELD_ITEMS;MAP_DIR="./Maps";RATEBASE=1048576;DECAYBASE=78642;RETRANSMIT_TIMEOUT_MULT=3.0;RETRANSMIT_TIMEOUT_MAX=5000;AVERAGE_DELTA_MAX=2500;LOG_LEVEL_STATUS=2;LOG_LEVEL_NORMAL=3;LOG_LEVEL_ERROR=2;LOG_LEVEL_DEBUG=3;LOG_LEVEL_QUEST=2;LOG_LEVEL_COMMANDS=1;LOG_LEVEL_CRASH=3;GLM_FORCE_RADIANS;RETRANSMIT_ACKED_PACKETS=true;SANITIZE_LUA_LIBS;CMAKE_INTDIR="MinSizeRel";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat></DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;_WINDOWS;WIN64;_CRT_SECURE_NO_WARNINGS;CRASH_LOGGING;NOMINMAX;COMMANDS_LOGGING;DISABLE_LOGSYS;BOTS;EMBPERL;EMBPERL_PLUGIN;LUA_EQEMU;EQDEBUG=5;INVERSEXY;FIELD_ITEMS;MAP_DIR=\"./Maps\";RATEBASE=1048576;DECAYBASE=78642;RETRANSMIT_TIMEOUT_MULT=3.0;RETRANSMIT_TIMEOUT_MAX=5000;AVERAGE_DELTA_MAX=2500;LOG_LEVEL_STATUS=2;LOG_LEVEL_NORMAL=3;LOG_LEVEL_ERROR=2;LOG_LEVEL_DEBUG=3;LOG_LEVEL_QUEST=2;LOG_LEVEL_COMMANDS=1;LOG_LEVEL_CRASH=3;GLM_FORCE_RADIANS;RETRANSMIT_ACKED_PACKETS=true;SANITIZE_LUA_LIBS;CMAKE_INTDIR=\"MinSizeRel\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Perl64\lib\CORE;C:\Users\jamesion\Source\eqemu\dependencies\luaj_x64\src;C:\Users\jamesion\Source\eqemu\dependencies\boost;C:\Users\jamesion\Source\eqemu\luabind;C:\Users\jamesion\Source\eqemu\dependencies\zlib_x64\include;C:\Users\jamesion\Source\eqemu\dependencies\mysql_x64\include;C:\Users\jamesion\Source\eqemu\common\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Perl64\lib\CORE;C:\Users\jamesion\Source\eqemu\dependencies\luaj_x64\src;C:\Users\jamesion\Source\eqemu\dependencies\boost;C:\Users\jamesion\Source\eqemu\luabind;C:\Users\jamesion\Source\eqemu\dependencies\zlib_x64\include;C:\Users\jamesion\Source\eqemu\dependencies\mysql_x64\include;C:\Users\jamesion\Source\eqemu\common\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalOptions>%(AdditionalOptions)  /machine:x64</AdditionalOptions>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;..\..\bin\MinSizeRel\common.lib;..\..\..\dependencies\mysql_x64\lib\mysqlclient.lib;..\..\..\dependencies\zlib_x64\lib\zlib.lib;Ws2_32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>No</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
+      <ImportLibrary>C:/Users/jamesion/Source/eqemu/win10x64build/bin/MinSizeRel/import_client_files.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/Users/jamesion/Source/eqemu/win10x64build/bin/MinSizeRel/import_client_files.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+      <Version></Version>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Perl64\lib\CORE;C:\Users\jamesion\Source\eqemu\dependencies\luaj_x64\src;C:\Users\jamesion\Source\eqemu\dependencies\boost;C:\Users\jamesion\Source\eqemu\luabind;C:\Users\jamesion\Source\eqemu\dependencies\zlib_x64\include;C:\Users\jamesion\Source\eqemu\dependencies\mysql_x64\include;C:\Users\jamesion\Source\eqemu\common\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>RelWithDebInfo/</AssemblerListingLocation>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;_WINDOWS;WIN64;_CRT_SECURE_NO_WARNINGS;CRASH_LOGGING;NOMINMAX;COMMANDS_LOGGING;DISABLE_LOGSYS;BOTS;EMBPERL;EMBPERL_PLUGIN;LUA_EQEMU;EQDEBUG=5;INVERSEXY;FIELD_ITEMS;MAP_DIR="./Maps";RATEBASE=1048576;DECAYBASE=78642;RETRANSMIT_TIMEOUT_MULT=3.0;RETRANSMIT_TIMEOUT_MAX=5000;AVERAGE_DELTA_MAX=2500;LOG_LEVEL_STATUS=2;LOG_LEVEL_NORMAL=3;LOG_LEVEL_ERROR=2;LOG_LEVEL_DEBUG=3;LOG_LEVEL_QUEST=2;LOG_LEVEL_COMMANDS=1;LOG_LEVEL_CRASH=3;GLM_FORCE_RADIANS;RETRANSMIT_ACKED_PACKETS=true;SANITIZE_LUA_LIBS;CMAKE_INTDIR="RelWithDebInfo";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;_WINDOWS;WIN64;_CRT_SECURE_NO_WARNINGS;CRASH_LOGGING;NOMINMAX;COMMANDS_LOGGING;DISABLE_LOGSYS;BOTS;EMBPERL;EMBPERL_PLUGIN;LUA_EQEMU;EQDEBUG=5;INVERSEXY;FIELD_ITEMS;MAP_DIR=\"./Maps\";RATEBASE=1048576;DECAYBASE=78642;RETRANSMIT_TIMEOUT_MULT=3.0;RETRANSMIT_TIMEOUT_MAX=5000;AVERAGE_DELTA_MAX=2500;LOG_LEVEL_STATUS=2;LOG_LEVEL_NORMAL=3;LOG_LEVEL_ERROR=2;LOG_LEVEL_DEBUG=3;LOG_LEVEL_QUEST=2;LOG_LEVEL_COMMANDS=1;LOG_LEVEL_CRASH=3;GLM_FORCE_RADIANS;RETRANSMIT_ACKED_PACKETS=true;SANITIZE_LUA_LIBS;CMAKE_INTDIR=\"RelWithDebInfo\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Perl64\lib\CORE;C:\Users\jamesion\Source\eqemu\dependencies\luaj_x64\src;C:\Users\jamesion\Source\eqemu\dependencies\boost;C:\Users\jamesion\Source\eqemu\luabind;C:\Users\jamesion\Source\eqemu\dependencies\zlib_x64\include;C:\Users\jamesion\Source\eqemu\dependencies\mysql_x64\include;C:\Users\jamesion\Source\eqemu\common\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Perl64\lib\CORE;C:\Users\jamesion\Source\eqemu\dependencies\luaj_x64\src;C:\Users\jamesion\Source\eqemu\dependencies\boost;C:\Users\jamesion\Source\eqemu\luabind;C:\Users\jamesion\Source\eqemu\dependencies\zlib_x64\include;C:\Users\jamesion\Source\eqemu\dependencies\mysql_x64\include;C:\Users\jamesion\Source\eqemu\common\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalOptions>%(AdditionalOptions)  /machine:x64</AdditionalOptions>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;..\..\bin\RelWithDebInfo\common.lib;..\..\..\dependencies\mysql_x64\lib\mysqlclient.lib;..\..\..\dependencies\zlib_x64\lib\zlib.lib;Ws2_32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>Debug</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
+      <ImportLibrary>C:/Users/jamesion/Source/eqemu/win10x64build/bin/RelWithDebInfo/import_client_files.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/Users/jamesion/Source/eqemu/win10x64build/bin/RelWithDebInfo/import_client_files.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+      <Version></Version>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\jamesion\Source\eqemu\client_files\import\CMakeLists.txt">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule C:/Users/jamesion/Source/eqemu/client_files/import/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -HC:/Users/jamesion/Source/eqemu -BC:/Users/jamesion/Source/eqemu/win10x64build --check-stamp-file C:/Users/jamesion/Source/eqemu/win10x64build/client_files/import/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/Users/jamesion/Source/eqemu/client_files/import/CMakeLists.txt;C:\Users\jamesion\Source\eqemu\client_files\import\CMakeLists.txt;C:\Users\jamesion\Source\eqemu\client_files\import\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\jamesion\Source\eqemu\win10x64build\client_files\import\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule C:/Users/jamesion/Source/eqemu/client_files/import/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -HC:/Users/jamesion/Source/eqemu -BC:/Users/jamesion/Source/eqemu/win10x64build --check-stamp-file C:/Users/jamesion/Source/eqemu/win10x64build/client_files/import/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/Users/jamesion/Source/eqemu/client_files/import/CMakeLists.txt;C:\Users\jamesion\Source\eqemu\client_files\import\CMakeLists.txt;C:\Users\jamesion\Source\eqemu\client_files\import\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\jamesion\Source\eqemu\win10x64build\client_files\import\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule C:/Users/jamesion/Source/eqemu/client_files/import/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -HC:/Users/jamesion/Source/eqemu -BC:/Users/jamesion/Source/eqemu/win10x64build --check-stamp-file C:/Users/jamesion/Source/eqemu/win10x64build/client_files/import/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:/Users/jamesion/Source/eqemu/client_files/import/CMakeLists.txt;C:\Users\jamesion\Source\eqemu\client_files\import\CMakeLists.txt;C:\Users\jamesion\Source\eqemu\client_files\import\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\jamesion\Source\eqemu\win10x64build\client_files\import\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule C:/Users/jamesion/Source/eqemu/client_files/import/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -HC:/Users/jamesion/Source/eqemu -BC:/Users/jamesion/Source/eqemu/win10x64build --check-stamp-file C:/Users/jamesion/Source/eqemu/win10x64build/client_files/import/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:/Users/jamesion/Source/eqemu/client_files/import/CMakeLists.txt;C:\Users\jamesion\Source\eqemu\client_files\import\CMakeLists.txt;C:\Users\jamesion\Source\eqemu\client_files\import\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\jamesion\Source\eqemu\win10x64build\client_files\import\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="C:\Users\jamesion\Source\eqemu\client_files\import\main.cpp"  />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="C:\Users\jamesion\Source\eqemu\win10x64build\ZERO_CHECK.vcxproj">
+      <Project>9DE5166B-CCDA-3C02-A365-5C04950E5F99</Project>
+      <Name>ZERO_CHECK</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\jamesion\Source\eqemu\win10x64build\common\common.vcxproj">
+      <Project>3D7921C4-30F1-37B7-A5B6-32269F0C20F3</Project>
+      <Name>common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

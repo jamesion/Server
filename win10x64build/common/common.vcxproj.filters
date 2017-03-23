@@ -1,0 +1,726 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\jamesion\Source\eqemu\common\base_packet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jamesion\Source\eqemu\common\classes.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jamesion\Source\eqemu\common\condition.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jamesion\Source\eqemu\common\crash.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jamesion\Source\eqemu\common\crc16.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jamesion\Source\eqemu\common\crc32.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jamesion\Source\eqemu\common\database.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jamesion\Source\eqemu\common\database_conversions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jamesion\Source\eqemu\common\database_instances.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jamesion\Source\eqemu\common\dbcore.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jamesion\Source\eqemu\common\emu_opcodes.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jamesion\Source\eqemu\common\emu_tcp_connection.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jamesion\Source\eqemu\common\emu_tcp_server.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jamesion\Source\eqemu\common\eq_dictionary.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jamesion\Source\eqemu\common\eqdb.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jamesion\Source\eqemu\common\eqdb_res.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jamesion\Source\eqemu\common\eqemu_exception.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jamesion\Source\eqemu\common\eqemu_config.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jamesion\Source\eqemu\common\eqemu_logsys.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jamesion\Source\eqemu\common\eq_packet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jamesion\Source\eqemu\common\eq_stream.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jamesion\Source\eqemu\common\eq_stream_factory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jamesion\Source\eqemu\common\eq_stream_ident.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jamesion\Source\eqemu\common\eq_stream_proxy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jamesion\Source\eqemu\common\eqtime.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jamesion\Source\eqemu\common\extprofile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jamesion\Source\eqemu\common\faction.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jamesion\Source\eqemu\common\guild_base.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jamesion\Source\eqemu\common\guilds.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jamesion\Source\eqemu\common\ipc_mutex.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jamesion\Source\eqemu\common\item.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jamesion\Source\eqemu\common\md5.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jamesion\Source\eqemu\common\memory_mapped_file.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jamesion\Source\eqemu\common\misc.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jamesion\Source\eqemu\common\misc_functions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jamesion\Source\eqemu\common\mutex.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jamesion\Source\eqemu\common\mysql_request_result.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jamesion\Source\eqemu\common\mysql_request_row.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jamesion\Source\eqemu\common\opcode_map.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jamesion\Source\eqemu\common\opcodemgr.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jamesion\Source\eqemu\common\packet_dump.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jamesion\Source\eqemu\common\packet_dump_file.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jamesion\Source\eqemu\common\packet_functions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jamesion\Source\eqemu\common\perl_eqdb.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jamesion\Source\eqemu\common\perl_eqdb_res.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jamesion\Source\eqemu\common\proc_launcher.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jamesion\Source\eqemu\common\ptimer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jamesion\Source\eqemu\common\races.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jamesion\Source\eqemu\common\rdtsc.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jamesion\Source\eqemu\common\rulesys.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jamesion\Source\eqemu\common\serverinfo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jamesion\Source\eqemu\common\shareddb.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jamesion\Source\eqemu\common\skills.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jamesion\Source\eqemu\common\spdat.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jamesion\Source\eqemu\common\string_util.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jamesion\Source\eqemu\common\struct_strategy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jamesion\Source\eqemu\common\tcp_connection.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jamesion\Source\eqemu\common\tcp_server.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jamesion\Source\eqemu\common\timeoutmgr.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jamesion\Source\eqemu\common\timer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jamesion\Source\eqemu\common\unix.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jamesion\Source\eqemu\common\worldconn.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jamesion\Source\eqemu\common\xml_parser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jamesion\Source\eqemu\common\platform.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jamesion\Source\eqemu\common\patches\patches.cpp">
+      <Filter>Patches</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jamesion\Source\eqemu\common\patches\sod.cpp">
+      <Filter>Patches</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jamesion\Source\eqemu\common\patches\sof.cpp">
+      <Filter>Patches</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jamesion\Source\eqemu\common\patches\rof.cpp">
+      <Filter>Patches</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jamesion\Source\eqemu\common\patches\rof2.cpp">
+      <Filter>Patches</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jamesion\Source\eqemu\common\patches\titanium.cpp">
+      <Filter>Patches</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jamesion\Source\eqemu\common\patches\uf.cpp">
+      <Filter>Patches</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jamesion\Source\eqemu\common\SocketLib\Base64.cpp">
+      <Filter>SocketLib</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jamesion\Source\eqemu\common\SocketLib\File.cpp">
+      <Filter>SocketLib</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jamesion\Source\eqemu\common\SocketLib\HttpdCookies.cpp">
+      <Filter>SocketLib</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jamesion\Source\eqemu\common\SocketLib\HttpdForm.cpp">
+      <Filter>SocketLib</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jamesion\Source\eqemu\common\SocketLib\HttpdSocket.cpp">
+      <Filter>SocketLib</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jamesion\Source\eqemu\common\SocketLib\HTTPSocket.cpp">
+      <Filter>SocketLib</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jamesion\Source\eqemu\common\SocketLib\MemFile.cpp">
+      <Filter>SocketLib</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jamesion\Source\eqemu\common\SocketLib\Mime.cpp">
+      <Filter>SocketLib</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jamesion\Source\eqemu\common\SocketLib\Parse.cpp">
+      <Filter>SocketLib</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jamesion\Source\eqemu\common\SocketLib\socket_include.cpp">
+      <Filter>SocketLib</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jamesion\Source\eqemu\common\SocketLib\Utility.cpp">
+      <Filter>SocketLib</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jamesion\Source\eqemu\common\StackWalker\StackWalker.cpp">
+      <Filter>StackWalker</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jamesion\Source\eqemu\common\tinyxml\tinystr.cpp">
+      <Filter>TinyXML</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jamesion\Source\eqemu\common\tinyxml\tinyxml.cpp">
+      <Filter>TinyXML</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jamesion\Source\eqemu\common\tinyxml\tinyxmlerror.cpp">
+      <Filter>TinyXML</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jamesion\Source\eqemu\common\tinyxml\tinyxmlparser.cpp">
+      <Filter>TinyXML</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\any.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\base_packet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\base_data.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\bodytypes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\classes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\condition.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\crash.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\crc16.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\crc32.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\data_verification.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\database.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\dbcore.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\deity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\emu_opcodes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\emu_oplist.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\emu_tcp_connection.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\emu_tcp_server.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\eq_constants.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\eq_dictionary.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\eq_packet_structs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\eqdb.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\eqdb_res.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\eqemu_exception.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\eqemu_config.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\eqemu_config_elements.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\eqemu_logsys.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\eq_packet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\eq_stream.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\eq_stream_factory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\eq_stream_ident.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\eq_stream_intf.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\eq_stream_locator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\eq_stream_proxy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\eq_stream_type.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\eqtime.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\errmsg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\extprofile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\faction.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\features.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\fixed_memory_hash_set.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\fixed_memory_variable_hash_set.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\global_define.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\guild_base.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\guilds.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\ipc_mutex.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\item.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\item_fieldlist.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\item_struct.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\languages.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\linked_list.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\loottable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\mail_oplist.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\md5.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\memory_mapped_file.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\misc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\misc_functions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\mutex.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\mysql_request_result.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\mysql_request_row.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\op_codes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\opcode_dispatch.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\opcodemgr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\packet_dump.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\packet_dump_file.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\packet_functions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\platform.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\proc_launcher.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\profiler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\ptimer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\queue.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\races.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\random.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\rdtsc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\rulesys.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\ruletypes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\seperator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\serverinfo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\servertalk.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\shareddb.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\skills.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\spdat.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\string_util.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\struct_strategy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\tcp_basic_server.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\tcp_connection.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\tcp_server.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\timeoutmgr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\timer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\types.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\unix.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\useperl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\version.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\worldconn.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\xml_parser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\zone_numbers.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\patches\patches.h">
+      <Filter>Patches</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\patches\sod.h">
+      <Filter>Patches</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\patches\sod_constants.h">
+      <Filter>Patches</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\patches\sod_itemfields.h">
+      <Filter>Patches</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\patches\sod_ops.h">
+      <Filter>Patches</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\patches\sod_structs.h">
+      <Filter>Patches</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\patches\sof.h">
+      <Filter>Patches</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\patches\sof_constants.h">
+      <Filter>Patches</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\patches\sof_itemfields.h">
+      <Filter>Patches</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\patches\sof_opcode_list.h">
+      <Filter>Patches</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\patches\sof_ops.h">
+      <Filter>Patches</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\patches\sof_structs.h">
+      <Filter>Patches</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\patches\ss_declare.h">
+      <Filter>Patches</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\patches\ss_define.h">
+      <Filter>Patches</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\patches\ss_register.h">
+      <Filter>Patches</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\patches\rof.h">
+      <Filter>Patches</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\patches\rof_constants.h">
+      <Filter>Patches</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\patches\rof_itemfields.h">
+      <Filter>Patches</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\patches\rof_ops.h">
+      <Filter>Patches</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\patches\rof_structs.h">
+      <Filter>Patches</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\patches\rof2.h">
+      <Filter>Patches</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\patches\rof2_constants.h">
+      <Filter>Patches</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\patches\rof2_itemfields.h">
+      <Filter>Patches</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\patches\rof2_ops.h">
+      <Filter>Patches</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\patches\rof2_structs.h">
+      <Filter>Patches</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\patches\titanium.h">
+      <Filter>Patches</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\patches\titanium_constants.h">
+      <Filter>Patches</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\patches\titanium_itemfields.h">
+      <Filter>Patches</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\patches\titanium_ops.h">
+      <Filter>Patches</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\patches\titanium_structs.h">
+      <Filter>Patches</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\patches\uf.h">
+      <Filter>Patches</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\patches\uf_constants.h">
+      <Filter>Patches</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\patches\uf_itemfields.h">
+      <Filter>Patches</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\patches\uf_ops.h">
+      <Filter>Patches</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\patches\uf_structs.h">
+      <Filter>Patches</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\SocketLib\Base64.h">
+      <Filter>SocketLib</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\SocketLib\File.h">
+      <Filter>SocketLib</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\SocketLib\HttpdCookies.h">
+      <Filter>SocketLib</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\SocketLib\HttpdForm.h">
+      <Filter>SocketLib</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\SocketLib\HttpdSocket.h">
+      <Filter>SocketLib</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\SocketLib\HTTPSocket.h">
+      <Filter>SocketLib</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\SocketLib\IFile.h">
+      <Filter>SocketLib</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\SocketLib\MemFile.h">
+      <Filter>SocketLib</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\SocketLib\Mime.h">
+      <Filter>SocketLib</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\SocketLib\Parse.h">
+      <Filter>SocketLib</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\SocketLib\socket_include.h">
+      <Filter>SocketLib</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\SocketLib\Utility.h">
+      <Filter>SocketLib</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\StackWalker\StackWalker.h">
+      <Filter>StackWalker</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\tinyxml\tinystr.h">
+      <Filter>TinyXML</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jamesion\Source\eqemu\common\tinyxml\tinyxml.h">
+      <Filter>TinyXML</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\jamesion\Source\eqemu\common\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{E1EDBBBA-45D7-3164-AD59-92D092EF7D94}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{2DF74BBE-4974-32AD-9265-70AE8CA8586E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Patches">
+      <UniqueIdentifier>{55908EA6-16A5-35EB-AB72-C1D1AC5624B4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SocketLib">
+      <UniqueIdentifier>{B7EF9DCF-49E6-366D-8416-421CDAF35883}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="StackWalker">
+      <UniqueIdentifier>{8728AEC6-4B72-306B-BD7D-BD8E2539EFFC}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TinyXML">
+      <UniqueIdentifier>{4FFC148E-FDBE-34F6-A53C-7DE0B8F61C8F}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
