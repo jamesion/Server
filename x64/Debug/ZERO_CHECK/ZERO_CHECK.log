@@ -1,0 +1,16 @@
+﻿  Checking Build System
+  CMake does not need to re-run because C:/Users/jamesion/Source/eqemu/win10x64build/CMakeFiles/generate.stamp is up-to-date.
+  CMake does not need to re-run because C:/Users/jamesion/Source/eqemu/win10x64build/luabind/CMakeFiles/generate.stamp is up-to-date.
+  CMake does not need to re-run because C:/Users/jamesion/Source/eqemu/win10x64build/common/CMakeFiles/generate.stamp is up-to-date.
+  CMake does not need to re-run because C:/Users/jamesion/Source/eqemu/win10x64build/shared_memory/CMakeFiles/generate.stamp is up-to-date.
+  CMake does not need to re-run because C:/Users/jamesion/Source/eqemu/win10x64build/world/CMakeFiles/generate.stamp is up-to-date.
+  CMake does not need to re-run because C:/Users/jamesion/Source/eqemu/win10x64build/zone/CMakeFiles/generate.stamp is up-to-date.
+  CMake does not need to re-run because C:/Users/jamesion/Source/eqemu/win10x64build/ucs/CMakeFiles/generate.stamp is up-to-date.
+  CMake does not need to re-run because C:/Users/jamesion/Source/eqemu/win10x64build/queryserv/CMakeFiles/generate.stamp is up-to-date.
+  CMake does not need to re-run because C:/Users/jamesion/Source/eqemu/win10x64build/eqlaunch/CMakeFiles/generate.stamp is up-to-date.
+  CMake does not need to re-run because C:/Users/jamesion/Source/eqemu/win10x64build/loginserver/CMakeFiles/generate.stamp is up-to-date.
+  CMake does not need to re-run because C:/Users/jamesion/Source/eqemu/win10x64build/tests/CMakeFiles/generate.stamp is up-to-date.
+  CMake does not need to re-run because C:/Users/jamesion/Source/eqemu/win10x64build/tests/cppunit/CMakeFiles/generate.stamp is up-to-date.
+  CMake does not need to re-run because C:/Users/jamesion/Source/eqemu/win10x64build/client_files/CMakeFiles/generate.stamp is up-to-date.
+  CMake does not need to re-run because C:/Users/jamesion/Source/eqemu/win10x64build/client_files/import/CMakeFiles/generate.stamp is up-to-date.
+  CMake does not need to re-run because C:/Users/jamesion/Source/eqemu/win10x64build/client_files/export/CMakeFiles/generate.stamp is up-to-date.

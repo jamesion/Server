@@ -35,3 +35,5 @@ Build_64/
 build_64/
 log/
 logs/
+/checkeqemuacid/x64/Debug
+/win10x64build

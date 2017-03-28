@@ -150,6 +150,8 @@ EQApplicationPacket *ServerManager::CreateServerListPacket(Client *c)
 
 	EQApplicationPacket *outapp = new EQApplicationPacket(OP_ServerListResponse, packet_size);
 	ServerListHeader_Struct *server_list = (ServerListHeader_Struct*)outapp->pBuffer;
+
+	
 	server_list->Unknown1 = 0x00000004;
 	server_list->Unknown2 = 0x00000000;
 	server_list->Unknown3 = 0x01650000;
