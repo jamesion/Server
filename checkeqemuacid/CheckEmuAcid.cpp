@@ -58,7 +58,9 @@ unsigned char * CheckEmuAcid::sendtoemu(SOCKET socket, unsigned short port,unsig
 	RecvBuff recv[5] = { 0 };
 	uchar recvbuf[255] = { 0 };
 
-	
+	int ret, i = 0,j=0, add_len = 0;
+
+	add_len = sizeof(SOCKADDR_IN);
 
 	addrSrv.sin_addr.S_un.S_addr = inet_addr(HOST_IP);        //设置服务器IP
 	addrSrv.sin_family = AF_INET;                             //设置协议  
@@ -73,27 +75,39 @@ unsigned char * CheckEmuAcid::sendtoemu(SOCKET socket, unsigned short port,unsig
 	cout << "请求数据报:"<<"        size(" << size << ")" << endl;
 	DumpPacketHex((uchar *)sendbuff, size);
 
-	struct timeval tv;
-	int ret,i=0,j=0;
-	tv.tv_sec = 10;
-	tv.tv_usec = 0;
-
-	if (setsockopt(socket, SOL_SOCKET, SO_RCVTIMEO, (char*)&tv, sizeof(tv)) < 0) 
+	while (1)
 	{
-		    printf("socket option  SO_RCVTIMEO not support\n");
-		    return 0;
+		ret = recvfrom(socket, (char*)recvbuf, sizeof(recvbuf), 0, (SOCKADDR*)&addrSrv, &add_len);
+		if (ret < 0) {
+			if (ret == EWOULDBLOCK || ret == EAGAIN) {
+			printf("recvfrom timeout\n");
+			return 0;
 
-	}
-	while ((ret = recvfrom(socket, (char*)recvbuf, sizeof(recvbuf), 0, NULL, NULL))>=0)
-	{
+		
+			}
+			else 
+				if (ret == -1) {
+				//printf("无接收包,错误码:%d\n", WSAGetLastError());
+				//WsaGetlasterror（）;
+					}
+
+					
+				else {
+				printf("recvfrom err:%d\n\n", ret);
+				}
+				}
+
+			
+		else {
+		
 		recv[i].pbuff = new uchar[ret] ;
 		recv[i].pBuf_len = ret;
 
 		cout << "接收到数据报:" << " 			        size(" << ret << ")" << endl;
-		cout << "未转换:" << endl;
+		/*cout << "未转换:" << endl;
 		DumpPacketHex(recvbuf, sizeof(recvbuf));
 		
-		cout << endl;
+		cout << endl;*/
 		memcpy(recv[i].pbuff, recvbuf, recv[i].pBuf_len);
 		//i++;
 		//Sleep(1000);
@@ -101,25 +115,21 @@ unsigned char * CheckEmuAcid::sendtoemu(SOCKET socket, unsigned short port,unsig
 		cout << "转换后:" << " 			        size(" << recv[i].pBuf_len << ")  " << ret << endl;
 		DumpPacketHex(recv[i].pbuff, recv[i].pBuf_len);
 		cout << endl;
-
 		i++;
 
 		}
-
-
-
-
-		if (ret == EWOULDBLOCK || ret == EAGAIN) {
-			        printf("recvfrom timeout\n");
-					
-		}
-		else { 	
-			if (ret == -1)
-				printf("无接收包\n");
-
-			else
-				printf("recvfrom err:%d\n\n", ret);
+		j++;
+		//printf("i:%d.", i);
+		if (j >= 500) {
+			printf("end");
+			return 0;
 			}
+		}
+
+
+
+
+		
 		
 
 	
@@ -128,12 +138,13 @@ unsigned char * CheckEmuAcid::sendtoemu(SOCKET socket, unsigned short port,unsig
 
 	
 
-	WSACleanup();
-	
+	//WSACleanup();
+
 	delete[]recv->pbuff;
+	return 0;
 	
 		//Sleep(10000);
-}
+	} 
 
 //显示十六进制缓存
 void CheckEmuAcid::dumpbuffhex(unsigned char *buff, int size)
@@ -191,6 +202,16 @@ unsigned short CheckEmuAcid::ceidbind(SOCKET socket)
 
 		//return port;
 	}
+	struct timeval tv;
+	tv.tv_sec = 10;
+	tv.tv_usec = 0;
+	if (setsockopt(socket, SOL_SOCKET, SO_RCVTIMEO, (char*)&tv, sizeof(timeval)) < 0)
+	{
+		printf("socket option  SO_RCVTIMEO not support\n");
+		return 0;
+
+	}
+
 
 
 	cout << "port:" << port << endl;

@@ -17,7 +17,7 @@ void main(string IP, string name, string password)
 
 	checkid->sendtoemu(hostsocket,port,checkid->send1,sizeof(checkid->send1));
 	checkid->sendtoemu(hostsocket, port, checkid->send2, sizeof(checkid->send2));
-	//checkid->sendtoemu(hostsocket, port, checkid->send3, sizeof(checkid->send3));
+	checkid->sendtoemu(hostsocket, port, checkid->send3, sizeof(checkid->send3));
 
 	closesocket(hostsocket);
 	WSACleanup();
