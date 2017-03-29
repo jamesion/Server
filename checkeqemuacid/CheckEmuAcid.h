@@ -118,17 +118,15 @@ public:
 
 	RecvBuff recv[10] = { 0 };
 
-void emulisentfrom(SOCKET socket, unsigned short port);
 
 public:
 	
-
-	void dumpbuffhex(unsigned char *buff, int size);
-	int sendtoemu(SOCKET socket,unsigned short por);
-	SOCKET connountto();
+	uint32  getemulsid();
+	int		sendtoemu(SOCKET socket,unsigned short por);
+	SOCKET  connountto();
 	unsigned short ceidbind(SOCKET socket);
 
-	void DumpPacketHex(const uchar* buf, uint32 size, uint32 cols = 16, uint32 skip = 0);
+	void	DumpPacketHex(const uchar* buf, uint32 size, uint32 cols = 16, uint32 skip = 0);
 	std::string DumpPacketHexToString(const uchar* buf, uint32 size, uint32 cols = 16, uint32 skip = 0);
 	
 };

@@ -17,11 +17,59 @@ CheckEmuAcid::~CheckEmuAcid()
 	
 }
 
+
+
+
+
+
+//获取eqemu服务器ID
+uint32 CheckEmuAcid::getemulsid()
+{
+	int i = 0, acidbuf_id = 0;
+	SOCKET hostsocket = 0;
+	unsigned short port;
+	closesocket(hostsocket);
+	WSACleanup();
+
+	if (!(hostsocket = connountto()))
+	{
+		cout << "Socket建立失败!!" << endl;
+		return 0;
+	}
+	port = ceidbind(hostsocket);
+
+	acidbuf_id = sendtoemu(hostsocket, port);
+
+	if (!acidbuf_id) {
+
+		printf("无法获取eqemu包含id包\n");
+	}
+	else
+	{
+
+		DumpPacketHex(recv[acidbuf_id].pbuff, recv[acidbuf_id].pBuf_len);
+
+		for (i = 0; i <= acidbuf_id; i++)
+		{
+			delete[]recv[i].pbuff;
+		}
+
+	}
+	closesocket(hostsocket);
+	WSACleanup();
+	return uint32();
+}
+
+
+
+
+
+
 //建立socket
 SOCKET CheckEmuAcid::connountto()
 {
-	int version_a = 1;                                        //low bit  
-	int version_b = 1;                                        //high bit  
+	int version_a = 2;                                        //low bit  
+	int version_b = 2;                                        //high bit  
 
 					    
 	WORD versionRequest = MAKEWORD(version_a, version_b);     //makeword
@@ -34,9 +82,9 @@ SOCKET CheckEmuAcid::connountto()
 		return 0;
 	}
 //校验版本号是否为1.1  
-	if (LOBYTE(wsaData.wVersion) != 1 || HIBYTE(wsaData.wVersion) != 1)
+	if (LOBYTE(wsaData.wVersion) != 2 || HIBYTE(wsaData.wVersion) != 2)
 	{
-		printf("错误:WINSOCK版本有误!!");
+		printf("错误:WINSOCK版本有误!!\n");
 		WSACleanup();
 		return 0;
 	}
@@ -55,8 +103,10 @@ int CheckEmuAcid::sendtoemu(SOCKET socket, unsigned short port)
 {
 	
 	SOCKADDR_IN addrSrv;    //声名一个服务器地址信息类型
-	
-	
+	SYSTEMTIME st = { 0 };
+	SYSTEMTIME now_time = { 0 };
+
+	GetLocalTime(&st);
 
 	int ret, i = 0,j=0, add_len = 0;
 
@@ -150,7 +200,7 @@ int CheckEmuAcid::sendtoemu(SOCKET socket, unsigned short port)
 
 			//acidbuf->pbuff = new uchar[ret];
 			//acidbuf = recv;
-			WSACleanup();
+			//WSACleanup();
 
 			
 
@@ -166,44 +216,30 @@ int CheckEmuAcid::sendtoemu(SOCKET socket, unsigned short port)
 			break;
 		}
 		i++;
+		GetLocalTime(&st);
 		}
-		j++;
-		//printf("j:%d.", j);
-		if (j >= 500) {
-			printf("end");
-			return 0;
+
+//接收超时检测
+
+		GetLocalTime(&now_time);
+		if ((now_time.wMinute - now_time.wMinute) >= 1) {
+			now_time.wSecond = +(now_time.wMinute - now_time.wMinute) * 60;
+		}
+
+		
+		if (now_time.wSecond - st.wSecond >10) {
+
+			printf("最进一次获取数据包时间:%02d...当前时间%02d....", st.wSecond, now_time.wSecond);
+			printf("接收数据报超时退出进程.\n");
+			break;
 			}
+
+
 		}
 	return i;
 
 	} 
 
-//显示十六进制缓存
-void CheckEmuAcid::dumpbuffhex(unsigned char *buff, int size)
-{
-	int i=0;
-	int j = 0;
-
-		while (i <= size-1)
-	{
-		if (buff[i] < 0x10)
-		{
-			std::cout << "0x0" << hex << static_cast <int>(buff[i]) << " ";
-		}
-		else
-		{
-			std::cout << "0x" << hex << static_cast <int>(buff[i]) << " ";
-		}
-		if (!((i + 1) % 10))
-		{
-			j = j + 10;
-
-			cout << dec << "   " << j << endl;
-		}
-		i++;
-	};
-		cout << dec << endl;
-}
 
 
 unsigned short CheckEmuAcid::ceidbind(SOCKET socket)
@@ -240,6 +276,9 @@ unsigned short CheckEmuAcid::ceidbind(SOCKET socket)
 	cout << "port:" << port << endl;
 	return port;
 }
+
+
+//显示十六进制缓存
 
 void CheckEmuAcid::DumpPacketHex(const uchar * buf, uint32 size, uint32 cols, uint32 skip)
 {
@@ -335,12 +374,4 @@ std::string CheckEmuAcid::DumpPacketHexToString(const uchar * buf, uint32 size, 
 }
 
 
-void CheckEmuAcid::emulisentfrom(SOCKET socket, unsigned short port)
-{
-	bool reluf = true;
-	/*while (reluf)
-	{
-		if(revcbuf)
-	}*/
-}
 
