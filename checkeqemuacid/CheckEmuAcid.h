@@ -47,7 +47,7 @@ class CheckEmuAcid
 {
 public:
 	unsigned int emu_acc_id;
-
+	uchar recvbuf[255] = { 0 };
 
 	//服务器返回准进确认信息存放
 	struct ServerAccepted_Struct {
@@ -60,7 +60,6 @@ public:
 	};
 
 	struct RecvBuff {
-		uchar BrecvBuf[255];
 		uchar *pbuff;
 		int pBuf_len=0;
 	};
@@ -117,7 +116,7 @@ public:
 		0x00,0x00,0x00,0x52,0x2f,0x74,0xa9,0x7e,0xe3,0x3d,0xbc,0x3d,0xdb,0x00,0x96,0x36,0xf1,0xd3,0x98,0x24,0xf3
 	};
 
-
+	RecvBuff recv[10] = { 0 };
 
 void emulisentfrom(SOCKET socket, unsigned short port);
 
@@ -125,7 +124,7 @@ public:
 	
 
 	void dumpbuffhex(unsigned char *buff, int size);
-	unsigned char *sendtoemu(SOCKET socket,unsigned short por,unsigned char *sendbuff,int size);
+	int sendtoemu(SOCKET socket,unsigned short por);
 	SOCKET connountto();
 	unsigned short ceidbind(SOCKET socket);
 

@@ -51,37 +51,48 @@ SOCKET CheckEmuAcid::connountto()
 }
 
 //发送数据包到emu
-unsigned char * CheckEmuAcid::sendtoemu(SOCKET socket, unsigned short port,unsigned char* sendbuff,int size)
+int CheckEmuAcid::sendtoemu(SOCKET socket, unsigned short port)
 {
 	
 	SOCKADDR_IN addrSrv;    //声名一个服务器地址信息类型
-	RecvBuff recv[5] = { 0 };
-	uchar recvbuf[255] = { 0 };
+	
+	
 
 	int ret, i = 0,j=0, add_len = 0;
 
 	add_len = sizeof(SOCKADDR_IN);
 
+	struct timeval tv;
+	tv.tv_sec = 10;
+	tv.tv_usec = 0;
+	if (setsockopt(socket, SOL_SOCKET, SO_RCVTIMEO, (char*)&tv, sizeof(timeval)) < 0)
+	{
+		printf("socket option  SO_RCVTIMEO not support\n");
+		return 0;
+
+	}
+
+
 	addrSrv.sin_addr.S_un.S_addr = inet_addr(HOST_IP);        //设置服务器IP
 	addrSrv.sin_family = AF_INET;                             //设置协议  
 	addrSrv.sin_port = htons(HOST_PORT);                      //设置服务器端口
 
-	printf("尝试发送数据包到emu...");
+	printf("尝试发送数据包到emu...\n");
 
-	sendto(socket,(char*)sendbuff,(int)size,0,(SOCKADDR*)&addrSrv,sizeof(SOCKADDR));
+	sendto(socket,(char*)send1, sizeof(send1),0,(SOCKADDR*)&addrSrv,sizeof(SOCKADDR));
 	//sendto(socket, (char *)send2, 20, 0, (SOCKADDR*)&addrSrv, sizeof(SOCKADDR));
 	//sendto (char *)send3, 42, 0, (SOCKADDR*)&addrSrv, sizeof(SOCKADDR));
 	
-	cout << "请求数据报:"<<"        size(" << size << ")" << endl;
-	DumpPacketHex((uchar *)sendbuff, size);
+	cout << "请求数据报:"<<"        size(" << sizeof(send1) << ")" << endl;
+	DumpPacketHex((uchar *)send1, sizeof(send1));
 
-	while (1)
+	while (true)
 	{
 		ret = recvfrom(socket, (char*)recvbuf, sizeof(recvbuf), 0, (SOCKADDR*)&addrSrv, &add_len);
 		if (ret < 0) {
 			if (ret == EWOULDBLOCK || ret == EAGAIN) {
 			printf("recvfrom timeout\n");
-			return 0;
+			break;
 
 		
 			}
@@ -103,47 +114,68 @@ unsigned char * CheckEmuAcid::sendtoemu(SOCKET socket, unsigned short port,unsig
 		recv[i].pbuff = new uchar[ret] ;
 		recv[i].pBuf_len = ret;
 
-		cout << "接收到数据报:" << " 			        size(" << ret << ")" << endl;
-		/*cout << "未转换:" << endl;
-		DumpPacketHex(recvbuf, sizeof(recvbuf));
 		
-		cout << endl;*/
 		memcpy(recv[i].pbuff, recvbuf, recv[i].pBuf_len);
-		//i++;
-		//Sleep(1000);
 	
-		cout << "转换后:" << " 			        size(" << recv[i].pBuf_len << ")  " << ret << endl;
+		cout << "接收到数据报:" << " 			        size(" << ret << ")" << endl;
 		DumpPacketHex(recv[i].pbuff, recv[i].pBuf_len);
 		cout << endl;
-		i++;
 
+		switch (ret)
+		{
+		case 21:
+		{
+			printf("尝试发送数据包到emu...\n");
+
+			sendto(socket, (char*)send2, sizeof(send2), 0, (SOCKADDR*)&addrSrv, sizeof(SOCKADDR));
+
+			cout << "请求数据报:" << "        size(" << sizeof(send2) << ")" << endl;
+			DumpPacketHex((uchar *)send2, sizeof(send2));
+			break;
+		}
+		case 25:
+		{
+			printf("尝试发送数据包到emu...\n");
+
+			sendto(socket, (char*)send3, sizeof(send3), 0, (SOCKADDR*)&addrSrv, sizeof(SOCKADDR));
+
+			cout << "请求数据报:" << "        size(" << sizeof(send3) << ")" << endl;
+			DumpPacketHex((uchar *)send3, sizeof(send3));
+			break;
+		}
+		case 98:
+		{
+			printf("eqemuacid 收报成功...\n");
+
+
+			//acidbuf->pbuff = new uchar[ret];
+			//acidbuf = recv;
+			WSACleanup();
+
+			
+
+			return i;
+
+			
+
+			break;
+		}
+
+
+		default:
+			break;
+		}
+		i++;
 		}
 		j++;
-		//printf("i:%d.", i);
+		//printf("j:%d.", j);
 		if (j >= 500) {
 			printf("end");
 			return 0;
 			}
 		}
+	return i;
 
-
-
-
-		
-		
-
-	
-
-	
-
-	
-
-	//WSACleanup();
-
-	delete[]recv->pbuff;
-	return 0;
-	
-		//Sleep(10000);
 	} 
 
 //显示十六进制缓存
@@ -201,15 +233,6 @@ unsigned short CheckEmuAcid::ceidbind(SOCKET socket)
 		cout << "绑定接收端口成功,端口:" <<port<< endl;
 
 		//return port;
-	}
-	struct timeval tv;
-	tv.tv_sec = 10;
-	tv.tv_usec = 0;
-	if (setsockopt(socket, SOL_SOCKET, SO_RCVTIMEO, (char*)&tv, sizeof(timeval)) < 0)
-	{
-		printf("socket option  SO_RCVTIMEO not support\n");
-		return 0;
-
 	}
 
 
