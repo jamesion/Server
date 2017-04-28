@@ -294,7 +294,10 @@ void Client::Handle_Login(const char* data, unsigned int size)
 		login_failed_attempts->unknown11[0] = 0x63;
 		login_failed_attempts->unknown12[0] = 0x01;
 		memcpy(login_failed_attempts->key, key.c_str(), key.size());
-
+		printf("login_failed_attempts:\n");
+		DumpPacketHex((const uchar*)login_accepted, 90, 16, 0);
+		DumpPacketHex((const uchar*)login_failed_attempts, 75,16,0);
+		printf("login_failed_attempts end.\n");
 #ifdef WIN32
 		unsigned int e_size;
 		char *encrypted_buffer = server.eq_crypto->Encrypt((const char*)login_failed_attempts, 75, e_size);

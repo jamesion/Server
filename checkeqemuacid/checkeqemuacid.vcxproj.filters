@@ -18,12 +18,24 @@
     <ClInclude Include="CheckEmuAcid.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="encryption.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="EDecrypt.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CheckEmuAcid.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="encryption.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="EDecrypt.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

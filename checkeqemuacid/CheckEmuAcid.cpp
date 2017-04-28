@@ -6,6 +6,8 @@
 #include <iomanip>
 
 
+
+
 CheckEmuAcid::CheckEmuAcid()
 {
 
@@ -48,6 +50,7 @@ uint32 CheckEmuAcid::getemulsid()
 	{
 
 		DumpPacketHex(recv[acidbuf_id].pbuff, recv[acidbuf_id].pBuf_len);
+		cryptoidbuff(acidbuf_id);
 
 		for (i = 0; i <= acidbuf_id; i++)
 		{
@@ -374,4 +377,80 @@ std::string CheckEmuAcid::DumpPacketHexToString(const uchar * buf, uint32 size, 
 }
 
 
+//对接收到的数据包解密
 
+unsigned int CheckEmuAcid::cryptoidbuff(int acidbuf_id)
+{
+	Encryption crytoeq;
+	ServerAccepted_Struct *cryptost;
+	ServerFailedAttempts_Struct *decrypt;
+
+	char *crype_buff = nullptr;
+	string eqeac;
+
+	cryptost = (ServerAccepted_Struct*)recv[acidbuf_id].pbuff;
+	DumpPacketHex((uchar*)cryptost->encrypt, 80);
+
+	eqeac = "EQEmuAuthCrypto";
+	if (crytoeq.LoadCrypto(eqeac)) {
+		printf("Encryption Loaded Successfully.\n");
+	}
+	else {
+		//We can't run without encryption, cleanup and exit.
+		printf("Encryption Failed to Load.\n");
+		
+		return 1;
+	}
+
+
+	crype_buff = cryptost->encrypt;
+	DumpPacketHex((uchar*)crype_buff, 80);
+	printf("%s   size:%d\n", crype_buff, (int)sizeof(crype_buff));
+	unsigned int d_size;
+	crype_buff= crytoeq.Encrypt(crype_buff, 8,  d_size);
+	DumpPacketHex((uchar*)crype_buff, 80);
+	printf("%s   size:%d\n", crype_buff,(int)sizeof(crype_buff));
+	decrypt = (ServerFailedAttempts_Struct*)crype_buff;
+	printf("acid:%d\n", decrypt->lsid);
+	crytoeq.DeleteHeap(crype_buff);
+
+
+	return emu_ac_id;
+}
+
+
+
+
+
+/*int CheckEmuAcid::edcrypt(uchar* buff,int size)
+{
+
+		string s = "romantic";
+		string k = "12345678";
+		bitset<64> plain = charToBitset(s.c_str());
+		key = charToBitset(k.c_str());
+		// 生成16个子密钥  
+		generateKeys();
+		// 密文写入 a.txt  
+		bitset<64> cipher = encrypt(plain);
+		fstream file1;
+		file1.open("D://a.txt", ios::binary | ios::out);
+		file1.write((char*)&cipher, sizeof(cipher));
+		file1.close();
+
+		// 读文件 a.txt  
+		bitset<64> temp;
+		file1.open("D://a.txt", ios::binary | ios::in);
+		file1.read((char*)&temp, sizeof(temp));
+		file1.close();
+
+		// 解密，并写入文件 b.txt  
+		bitset<64> temp_plain = decrypt(temp);
+		file1.open("D://b.txt", ios::binary | ios::out);
+		file1.write((char*)&temp_plain, sizeof(temp_plain));
+		file1.close();
+
+
+
+	return 0;
+}   */

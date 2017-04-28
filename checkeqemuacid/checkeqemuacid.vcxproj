@@ -20,9 +20,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CheckEmuAcid.h" />
+    <ClInclude Include="EDecrypt.h" />
+    <ClInclude Include="encryption.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CheckEmuAcid.cpp" />
+    <ClCompile Include="EDecrypt.cpp" />
+    <ClCompile Include="encryption.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -81,10 +85,27 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <SDLCheck>true</SDLCheck>
+      <SDLCheck>
+      </SDLCheck>
       <AdditionalIncludeDirectories>C:\Perl64\lib\CORE;C:\Users\jamesion\Source\eqemu\dependencies\luaj_x64\src;C:\Users\jamesion\Source\eqemu\dependencies\boost;C:\Users\jamesion\Source\eqemu\luabind;C:\Users\jamesion\Source\eqemu\dependencies\zlib_x64\include;C:\Users\jamesion\Source\eqemu\dependencies\mysql_x64\include;C:\Users\jamesion\Source\eqemu\common\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_WINDOWS;WIN64;_CRT_SECURE_NO_WARNINGS;CRASH_LOGGING;NOMINMAX;COMMANDS_LOGGING;DISABLE_LOGSYS;BOTS;EMBPERL;EMBPERL_PLUGIN;LUA_EQEMU;EQDEBUG=5;INVERSEXY;FIELD_ITEMS;MAP_DIR="./Maps";RATEBASE=1048576;DECAYBASE=78642;RETRANSMIT_TIMEOUT_MULT=3.0;RETRANSMIT_TIMEOUT_MAX=5000;AVERAGE_DELTA_MAX=2500;LOG_LEVEL_STATUS=2;LOG_LEVEL_NORMAL=3;LOG_LEVEL_ERROR=2;LOG_LEVEL_DEBUG=3;LOG_LEVEL_QUEST=2;LOG_LEVEL_COMMANDS=1;LOG_LEVEL_CRASH=3;GLM_FORCE_RADIANS;RETRANSMIT_ACKED_PACKETS=true;SANITIZE_LUA_LIBS;CMAKE_INTDIR="Debug";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <MinimalRebuild>false</MinimalRebuild>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AssemblerListingLocation>Debug/</AssemblerListingLocation>
+      <CompileAs>CompileAsCpp</CompileAs>
     </ClCompile>
+    <Link>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;..\win10x64build\x64\Debug\common.lib;..\dependencies\mysql_x64\lib\libmysql.lib;..\dependencies\zlib_x64\lib\zlib.lib;Ws2_32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>C:/Users/jamesion/Source/eqemu/win10x64build/bin/Debug/checkeqemacid.pdb</ProgramDatabaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
