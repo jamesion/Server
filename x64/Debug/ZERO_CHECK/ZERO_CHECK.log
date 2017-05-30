@@ -1,0 +1,18 @@
+﻿  Checking Build System
+  CMake does not need to re-run because D:/Source/neweq/build/CMakeFiles/generate.stamp is up-to-date.
+  CMake does not need to re-run because D:/Source/neweq/build/common/CMakeFiles/generate.stamp is up-to-date.
+  CMake does not need to re-run because D:/Source/neweq/build/libs/CMakeFiles/generate.stamp is up-to-date.
+  CMake does not need to re-run because D:/Source/neweq/build/libs/luabind/CMakeFiles/generate.stamp is up-to-date.
+  CMake does not need to re-run because D:/Source/neweq/build/libs/libuv/CMakeFiles/generate.stamp is up-to-date.
+  CMake does not need to re-run because D:/Source/neweq/build/libs/format/CMakeFiles/generate.stamp is up-to-date.
+  CMake does not need to re-run because D:/Source/neweq/build/libs/format/fmt/CMakeFiles/generate.stamp is up-to-date.
+  CMake does not need to re-run because D:/Source/neweq/build/shared_memory/CMakeFiles/generate.stamp is up-to-date.
+  CMake does not need to re-run because D:/Source/neweq/build/world/CMakeFiles/generate.stamp is up-to-date.
+  CMake does not need to re-run because D:/Source/neweq/build/zone/CMakeFiles/generate.stamp is up-to-date.
+  CMake does not need to re-run because D:/Source/neweq/build/ucs/CMakeFiles/generate.stamp is up-to-date.
+  CMake does not need to re-run because D:/Source/neweq/build/queryserv/CMakeFiles/generate.stamp is up-to-date.
+  CMake does not need to re-run because D:/Source/neweq/build/eqlaunch/CMakeFiles/generate.stamp is up-to-date.
+  CMake does not need to re-run because D:/Source/neweq/build/loginserver/CMakeFiles/generate.stamp is up-to-date.
+  CMake does not need to re-run because D:/Source/neweq/build/client_files/CMakeFiles/generate.stamp is up-to-date.
+  CMake does not need to re-run because D:/Source/neweq/build/client_files/import/CMakeFiles/generate.stamp is up-to-date.
+  CMake does not need to re-run because D:/Source/neweq/build/client_files/export/CMakeFiles/generate.stamp is up-to-date.
