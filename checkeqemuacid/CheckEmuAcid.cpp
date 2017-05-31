@@ -1,11 +1,11 @@
 #define _WINSOCK_DEPRECATED_NO_WARNINGS
 
 #include "CheckEmuAcid.h"
-#include <openssl/des.h>
+#include "../openssl_x64/include/openssl/des.h"
 
 #include <sstream>
 #include <iomanip>
-#include "encryption.h"
+
 
 
 
@@ -154,8 +154,6 @@ int CheckEmuAcid::sendtoemu(SOCKET socket, unsigned short port)
 		ret = recvfrom(socket, (char*)recvbuf, sizeof(recvbuf), 0, (SOCKADDR*)&addrSrv, &add_len);
 		if (ret > 0) {
 
-			if (i > 10) i = 0;
-
 			recv[i].pbuff = new uchar[ret];
 			recv[i].pBuf_len = ret;
 
@@ -198,16 +196,13 @@ int CheckEmuAcid::sendtoemu(SOCKET socket, unsigned short port)
 				DumpPacketHex((uchar *)send3, sizeof(send3));
 				break;
 			}
-			case 106:
+			case 98:
 			{
 				printf("eqemuacid 收报成功...\n");
 
 				//acidbuf->pbuff = new uchar[ret];
 				//acidbuf = recv;
 				//WSACleanup();
-
-				sendto(socket, (char*)end1, sizeof(end1), 0, (SOCKADDR*)&addrSrv, sizeof(SOCKADDR));
-				sendto(socket, (char*)end2, sizeof(end2), 0, (SOCKADDR*)&addrSrv, sizeof(SOCKADDR));
 
 				return i;
 				break;
@@ -237,8 +232,7 @@ int CheckEmuAcid::sendtoemu(SOCKET socket, unsigned short port)
 			//return i;
 			break;
 			}
-		sendto(socket, (char*)end1, sizeof(end1), 0, (SOCKADDR*)&addrSrv, sizeof(SOCKADDR));
-		sendto(socket, (char*)end2, sizeof(end2), 0, (SOCKADDR*)&addrSrv, sizeof(SOCKADDR));
+
 
 		}
 		return i-1;
