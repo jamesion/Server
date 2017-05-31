@@ -1,0 +1,6 @@
+﻿  main.cpp
+  CheckEmuAcid.cpp
+  正在生成代码...
+c:\users\jamesion\source\eqemu\checkeqemuacid\checkemuacid.cpp(136): warning C4715: “CheckEmuAcid::sendtoemu”: 不是所有的控件路径都返回值
+  checkeqemuacid.vcxproj -> C:\Users\jamesion\Source\eqemu\win10x64build\x64\Debug\checkeqemuacid.exe
+  checkeqemuacid.vcxproj -> C:\Users\jamesion\Source\eqemu\win10x64build\x64\Debug\checkeqemuacid.pdb (Partial PDB)
