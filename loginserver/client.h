@@ -132,6 +132,7 @@ private:
 	unsigned int play_server_id;
 	unsigned int play_sequence_id;
 	std::string key;
+	int v = 0;
 };
 
 #endif

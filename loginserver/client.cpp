@@ -36,8 +36,14 @@ Client::Client(std::shared_ptr<EQStreamInterface> c, LSClientVersion v)
 bool Client::Process()
 {
 	EQApplicationPacket *app = connection->PopPacket();
+
 	while (app)
 	{
+		if (v == 0)
+		{
+			Log(Logs::General, Logs::Login_Server, "Application packet goto client process (size %u)", app->Size());
+			v = 1;
+		}
 		if (server.options.IsTraceOn())
 		{
 			Log(Logs::General, Logs::Login_Server, "Application packet received from client (size %u)", app->Size());

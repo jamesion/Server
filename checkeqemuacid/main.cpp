@@ -4,8 +4,12 @@
 void main(string name, string password) 
 {
 	CheckEmuAcid *checkid = new CheckEmuAcid();
+	uint32 aclsid;
 	
-	checkid->getemulsid();
+	aclsid=checkid->getemulsid();
+
+	if(aclsid)
+	printf("acid:%d\n", aclsid);
 
 	getchar();
 
