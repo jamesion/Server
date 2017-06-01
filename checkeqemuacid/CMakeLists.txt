@@ -2,10 +2,13 @@ CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
 
 SET(acid_sources
 	CheckEmuAcid.cpp
+	encryption.cpp
+	main.cpp
 )
 
 SET(acid_headers
 	CheckEmuAcid.h
+	encryption.h
 )
 
 FIND_PACKAGE(OpenSSL REQUIRED)

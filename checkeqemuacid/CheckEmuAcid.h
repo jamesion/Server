@@ -1,13 +1,13 @@
 #ifndef EQEMU_CACID_H
 #define EQEMU_CACID_H
 
-#define _WINDOWS 1
+//#define _WINDOWS 1
 
 #include "WinSock2.h"
 #include "iostream"
 #include "stdio.h"
 #include "Windows.h"
-#include "../common/random.h"
+//#include "../common/random.h"
 #include "../common/types.h"
 #include "encryption.h"
 //#include "EDecrypt.h"

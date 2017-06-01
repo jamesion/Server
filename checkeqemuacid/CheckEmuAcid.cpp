@@ -33,7 +33,7 @@ uint32 CheckEmuAcid::getemulsid()
 	int i = 0, acidbuf_id = 0;
 	uint32 aclsid = 0;
 	SOCKET hostsocket = 0;
-	//unsigned short port;
+
 	closesocket(hostsocket);
 	WSACleanup();
 
@@ -45,13 +45,8 @@ uint32 CheckEmuAcid::getemulsid()
 	}
 
 
-	/*if (!(port = ceidbind(hostsocket)))
-	{
-		cout << "端口绑定失败退出" << endl;
-		return 0;
-	};*/
 
-	acidbuf_id = sendtoemu(hostsocket/*, port*/);
+	acidbuf_id = sendtoemu(hostsocket);
 
 	if (!recv[acidbuf_id].pBuf_len) {
 
@@ -154,6 +149,7 @@ int CheckEmuAcid::sendtoemu(SOCKET socket /*unsigned short port*/)
 	//printf("密码包：%s\n", outbuffer.c_str());
 	cout << "加密包:" << " 			        size(" << user.size() << ")" << user.c_str() << endl;
 	DumpPacketHex((const uchar*)(user.c_str()), (uint32)user.size());
+	
 
 	addrSrv.sin_addr.S_un.S_addr = inet_addr(HOST_IP);        //设置服务器IP
 	addrSrv.sin_family = AF_INET;                             //设置协议  
