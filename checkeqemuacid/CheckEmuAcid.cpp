@@ -5,6 +5,8 @@
 
 #include <sstream>
 #include <iomanip>
+#include <iostream>
+#include <string>
 
 
 
@@ -31,7 +33,7 @@ uint32 CheckEmuAcid::getemulsid()
 	int i = 0, acidbuf_id = 0;
 	uint32 aclsid = 0;
 	SOCKET hostsocket = 0;
-	unsigned short port;
+	//unsigned short port;
 	closesocket(hostsocket);
 	WSACleanup();
 
@@ -43,11 +45,11 @@ uint32 CheckEmuAcid::getemulsid()
 	}
 
 
-	if (!(port = ceidbind(hostsocket)))
+	/*if (!(port = ceidbind(hostsocket)))
 	{
 		cout << "端口绑定失败退出" << endl;
 		return 0;
-	};
+	};*/
 
 	acidbuf_id = sendtoemu(hostsocket/*, port*/);
 
@@ -58,7 +60,7 @@ uint32 CheckEmuAcid::getemulsid()
 	}
 	else
 	{
-		if (recv[acidbuf_id].pBuf_len == 98)
+		if (recv[acidbuf_id].getlsid)
 		{
 		printf("acidbuf_id:%d\nrecv.len:%d\n", acidbuf_id,recv[acidbuf_id].pBuf_len);
 		DumpPacketHex(recv[acidbuf_id].pbuff, recv[acidbuf_id].pBuf_len);
@@ -125,34 +127,37 @@ SOCKET CheckEmuAcid::connountto()
 int CheckEmuAcid::sendtoemu(SOCKET socket /*unsigned short port*/)
 {
 	//声名一个服务器地址信息类型
-	SOCKADDR_IN addrSrv;    
+	SOCKADDR_IN addrSrv;
 	SYSTEMTIME st = { 0 };
 	SYSTEMTIME now_time = { 0 };
 
+	string outbuffer = "";
+	outbuffer.resize(16, NULL);
+	string user = "";
+	user.resize(16, NULL);
 	ServerRecv_Struct *recvop = new ServerRecv_Struct;
-
 	GetLocalTime(&st);
 
-	int ret, i = 0,j=0, add_len = 0;
+	int ret, i = 0, j = 0, add_len = 0;
 
 	add_len = sizeof(SOCKADDR_IN);
 
-	/*struct timeval tv;
-	tv.tv_sec = 10;
-	tv.tv_usec = 0;
-	if (setsockopt(socket, SOL_SOCKET, SO_RCVTIMEO, (char*)&tv, sizeof(timeval)) < 0)
-	{
-		printf("socket option  SO_RCVTIMEO not support\n");
-		return 0;
+	auto r = eqcrypt_block((const char*)account + 24, sizeof(account)-26, &outbuffer[0], 0);
+	if (r == nullptr) {
+		printf("Failed to decrypt eqcrypt block");
+		return -1;
+	}
+	cout << "密码包:" << " 	     size(" << outbuffer.size() << ")" <<  outbuffer.c_str() << endl;
+	DumpPacketHex((const uchar*)(outbuffer.c_str()), (uint32)outbuffer.size());
 
-	}*/
-
+	r = eqcrypt_block(outbuffer.c_str(), outbuffer.size() , &user[0], 1);
+	//printf("密码包：%s\n", outbuffer.c_str());
+	cout << "加密包:" << " 			        size(" << user.size() << ")" << user.c_str() << endl;
+	DumpPacketHex((const uchar*)(user.c_str()), (uint32)user.size());
 
 	addrSrv.sin_addr.S_un.S_addr = inet_addr(HOST_IP);        //设置服务器IP
 	addrSrv.sin_family = AF_INET;                             //设置协议  
 	addrSrv.sin_port = htons(HOST_PORT);                      //设置服务器端口
-
-	printf("尝试发送数据包到emu...\n");
 
 	emusendto(clienup,sizeof(clienup), socket, addrSrv);
 
@@ -184,10 +189,13 @@ int CheckEmuAcid::sendtoemu(SOCKET socket /*unsigned short port*/)
 				{
 				case 255:
 				{
+
 					account[40] = 0x85;
 					account[41] = 0x78;
 					sure[18] = 0xdd;
 					sure[19] = 0x00;
+					printf("para255:%d\n", recvop->para);
+					break;
 				}
 				case 0:
 				{
@@ -195,6 +203,8 @@ int CheckEmuAcid::sendtoemu(SOCKET socket /*unsigned short port*/)
 					account[41] = 0x9b;
 					sure[18] = 0x93;
 					sure[19] = 0x1f;
+					printf("para0:%d\n", recvop->para);
+					break;
 
 				}
 				case 17:
@@ -203,15 +213,17 @@ int CheckEmuAcid::sendtoemu(SOCKET socket /*unsigned short port*/)
 					account[41] = 0xf3;
 					sure[18] = 0x0b;
 					sure[19] = 0xda;
+					printf("para17:%d\n", recvop->para);
+					break;
 
 				}
 
 				default:
-				{
-					emusendto(sure, sizeof(sure), socket, addrSrv);
 					break;
+
+
 				}
-				}
+			emusendto(sure, sizeof(sure), socket, addrSrv);
 			}
 			case 9:
 			{
@@ -223,6 +235,7 @@ int CheckEmuAcid::sendtoemu(SOCKET socket /*unsigned short port*/)
 					emusendto(end1, sizeof(end1), socket, addrSrv);
 					emusendto(end2, sizeof(end2), socket, addrSrv);
 					emusendto(end2, sizeof(end3), socket, addrSrv);
+					recv[i].getlsid = true;
 					return i;
 				}
 				break;
@@ -265,7 +278,7 @@ int CheckEmuAcid::sendtoemu(SOCKET socket /*unsigned short port*/)
 
 
 
-unsigned short CheckEmuAcid::ceidbind(SOCKET socket)
+/*unsigned short CheckEmuAcid::ceidbind(SOCKET socket)
 {
 	int i = 0;
 	SOCKADDR_IN serverin;
@@ -297,7 +310,8 @@ unsigned short CheckEmuAcid::ceidbind(SOCKET socket)
 
 	cout << "port:" << port << endl;
 	return port;
-}
+	
+}*/
 
 
 //显示十六进制缓存

@@ -1,6 +1,6 @@
 ﻿  CheckEmuAcid.cpp
-  encryption.cpp
   EDecrypt.cpp
+  encryption.cpp
   main.cpp
   checkeqemuacid.vcxproj -> D:\Source\neweq\build\x64\Debug\checkeqemuacid.exe
   checkeqemuacid.vcxproj -> D:/Source/neweq/build/bin/Debug/loginserver.pdb (Partial PDB)
