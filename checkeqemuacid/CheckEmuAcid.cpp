@@ -1,13 +1,13 @@
 #define _WINSOCK_DEPRECATED_NO_WARNINGS
 
 #include "CheckEmuAcid.h"
-#include "../openssl_x64/include/openssl/des.h"
+#include <openssl/des.h>
 
 #include <sstream>
 #include <iomanip>
 #include <iostream>
 #include <string>
-
+ 
 
 
 
