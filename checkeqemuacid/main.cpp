@@ -8,11 +8,13 @@ void main(string name, string password)
 	
 	aclsid=checkid->getemulsid();
 
-	if(aclsid)
-	printf("acid:%d\n", aclsid);
+	if (aclsid)
+	{
+		printf("acid:%d\n", aclsid);
 
-	delete checkid;
+		delete checkid;
+	}
 
-	getchar();
+	system("pause");
 
 }

@@ -48,7 +48,7 @@ uint32 CheckEmuAcid::getemulsid()
 	cout << "accout size:" << accountbuf.size() << endl;
 	DumpPacketHex((uchar *)accountbuf.c_str(), (uint32)accountbuf.size());
 
-	acidbuf_id = sendtoemu(hostsocket);
+	acidbuf_id = sendtoemu(hostsocket,accountbuf);
 
 	if (!recv[acidbuf_id].pBuf_len) {
 
@@ -59,7 +59,7 @@ uint32 CheckEmuAcid::getemulsid()
 	{
 		if (recv[acidbuf_id].getlsid)
 		{
-		printf("acidbuf_id:%d\nrecv.len:%d\n", acidbuf_id,recv[acidbuf_id].pBuf_len);
+		printf("acidbuf_id:%d\nrecv.len:%d,getlsid:%d\n", acidbuf_id,recv[acidbuf_id].pBuf_len, recv[acidbuf_id].getlsid);
 		DumpPacketHex(recv[acidbuf_id].pbuff, recv[acidbuf_id].pBuf_len);
 		
 		aclsid=cryptoidbuff(acidbuf_id);
@@ -121,7 +121,7 @@ SOCKET CheckEmuAcid::connountto()
 }
 
 //发送数据包到emu
-int CheckEmuAcid::sendtoemu(SOCKET socket /*unsigned short port*/)
+int CheckEmuAcid::sendtoemu(SOCKET socket ,string accountbuff)
 {
 	//声名一个服务器地址信息类型
 	SOCKADDR_IN addrSrv;
@@ -129,9 +129,8 @@ int CheckEmuAcid::sendtoemu(SOCKET socket /*unsigned short port*/)
 	SYSTEMTIME now_time = { 0 };
 
 	string outbuffer = "";
-	outbuffer.resize(16, NULL);
-	string user = "";
-	user.resize(16, NULL);
+	//outbuffer.resize(accountbuff.size()+26, NULL);
+	
 	ServerRecv_Struct *recvop = new ServerRecv_Struct;
 	GetLocalTime(&st);
 
@@ -139,30 +138,27 @@ int CheckEmuAcid::sendtoemu(SOCKET socket /*unsigned short port*/)
 
 	add_len = sizeof(SOCKADDR_IN);
 
-	auto r = eqcrypt_block((const char*)account + 24, sizeof(account)-26, &outbuffer[0], 0);
-	if (r == nullptr) {
-		printf("Failed to decrypt eqcrypt block");
-		return -1;
-	}
-	cout << "密码包:" << " 	     size(" << outbuffer.size() << ")" <<  outbuffer.c_str() << endl;
-	DumpPacketHex((const uchar*)(outbuffer.c_str()), (uint32)outbuffer.size());
-
-	r = eqcrypt_block(outbuffer.c_str(), outbuffer.size() , &user[0], 1);
-	//printf("密码包：%s\n", outbuffer.c_str());
-	cout << "加密包:" << " 			        size(" << user.size() << ")" << user.c_str() << endl;
-	DumpPacketHex((const uchar*)(user.c_str()), (uint32)user.size());
 	
 
 	addrSrv.sin_addr.S_un.S_addr = inet_addr(HOST_IP);        //设置服务器IP
 	addrSrv.sin_family = AF_INET;                             //设置协议  
-	addrSrv.sin_port = htons(HOST_PORT);                      //设置服务器端口
+	addrSrv.sin_port = htons(HOST_PORT);        //设置服务器端口
 
+	outbuffer.append((char*)account,sizeof(account));
+	outbuffer += accountbuff;
 	emusendto(clienup,sizeof(clienup), socket, addrSrv);
 
 
 	while (true)
 	{
-		if (i > 10) break;
+		
+		if (i > 10)
+		{
+			recv[i - 1].pBuf_len = 0;
+			recv[i-1].getlsid = false;
+			break;
+		}
+		
 		cout << "bigin recvfrom ret:" << endl;
 		ret = recvfrom(socket, (char*)recvbuf, sizeof(recvbuf), 0, (SOCKADDR*)&addrSrv, &add_len);
 		cout << "recvfrom ret:" << ret << endl;
@@ -180,6 +176,7 @@ int CheckEmuAcid::sendtoemu(SOCKET socket /*unsigned short port*/)
 
 			recvop = (ServerRecv_Struct*)recv[i].pbuff;
 			printf("recvop=%d,%d\n",(int)recvop->op, recvop->para);
+			
 			switch (recvop->op)
 			{
 			
@@ -190,8 +187,8 @@ int CheckEmuAcid::sendtoemu(SOCKET socket /*unsigned short port*/)
 				case 255:
 				{
 
-					account[40] = 0x85;
-					account[41] = 0x78;
+					//outbuffer+= 0x85;  //new server flag
+					//outbuffer += 0x78;
 					sure[18] = 0xdd;
 					sure[19] = 0x00;
 					printf("para255:%d\n", recvop->para);
@@ -199,8 +196,8 @@ int CheckEmuAcid::sendtoemu(SOCKET socket /*unsigned short port*/)
 				}
 				case 0:
 				{
-					account[40] = 0x1c;
-					account[41] = 0x9b;
+					//outbuffer += 0x1c;
+					//outbuffer += 0x9b;
 					sure[18] = 0x93;
 					sure[19] = 0x1f;
 					printf("para0:%d\n", recvop->para);
@@ -209,8 +206,9 @@ int CheckEmuAcid::sendtoemu(SOCKET socket /*unsigned short port*/)
 				}
 				case 17:
 				{
-					account[40] = 0x24;
-					account[41] = 0xf3;
+					outbuffer += 0x24;
+					outbuffer += 0xf3;
+
 					sure[18] = 0x0b;
 					sure[19] = 0xda;
 					printf("para17:%d\n", recvop->para);
@@ -227,18 +225,22 @@ int CheckEmuAcid::sendtoemu(SOCKET socket /*unsigned short port*/)
 			}
 			case 9:
 			{
-				if (recvop->para == 2)
-					emusendto(account, sizeof(account), socket, addrSrv);
+				//if (recvop->para == 2)
+					//emusendto((uchar*)outbuffer.c_str(), (int)outbuffer.size(), socket, addrSrv);
 				if (recvop->para == 3)
 				{
-					emusendto(end1, sizeof(end0), socket, addrSrv);
+					emusendto(end0, sizeof(end0), socket, addrSrv);
 					emusendto(end1, sizeof(end1), socket, addrSrv);
 					emusendto(end2, sizeof(end2), socket, addrSrv);
-					emusendto(end2, sizeof(end3), socket, addrSrv);
+					emusendto(end3, sizeof(end3), socket, addrSrv);
 					recv[i].getlsid = true;
 					return i;
 				}
 				break;
+			}
+			case 3:
+			{
+				emusendto((uchar*)outbuffer.c_str(), (int)outbuffer.size(), socket, addrSrv);
 			}
 
 			default:
@@ -269,8 +271,8 @@ int CheckEmuAcid::sendtoemu(SOCKET socket /*unsigned short port*/)
 		}
 
 
-	emusendto(end1, sizeof(end1), socket, addrSrv);
-	emusendto(end2, sizeof(end2), socket, addrSrv);
+	//emusendto(end1, sizeof(end1), socket, addrSrv);
+	//emusendto(end2, sizeof(end2), socket, addrSrv);
 
 		return i-1;
 
