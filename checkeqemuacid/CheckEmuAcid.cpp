@@ -33,7 +33,7 @@ uint32 CheckEmuAcid::getemulsid()
 	int i = 0, acidbuf_id = 0;
 	uint32 aclsid = 0;
 	SOCKET hostsocket = 0;
-
+	string accountbuf;
 	closesocket(hostsocket);
 	WSACleanup();
 
@@ -44,7 +44,9 @@ uint32 CheckEmuAcid::getemulsid()
 		return 0;
 	}
 
-
+	accountbuf=getaccount();
+	cout << "accout size:" << accountbuf.size() << endl;
+	DumpPacketHex((uchar *)accountbuf.c_str(), (uint32)accountbuf.size());
 
 	acidbuf_id = sendtoemu(hostsocket);
 
@@ -161,7 +163,9 @@ int CheckEmuAcid::sendtoemu(SOCKET socket /*unsigned short port*/)
 	while (true)
 	{
 		if (i > 10) break;
+		cout << "bigin recvfrom ret:" << endl;
 		ret = recvfrom(socket, (char*)recvbuf, sizeof(recvbuf), 0, (SOCKADDR*)&addrSrv, &add_len);
+		cout << "recvfrom ret:" << ret << endl;
 		if (ret > 0) {
 			
 			recv[i].pbuff = new uchar[ret];
@@ -451,4 +455,44 @@ int CheckEmuAcid::emusendto(unsigned char* send, int Size,SOCKET socket, SOCKADD
 	cout << "请求数据报:" << "        size(" <<  Size  << ")" << endl;
 	DumpPacketHex((uchar *)send, Size);
 	return 0;
+}
+
+string CheckEmuAcid::getaccount()
+{
+	char fn = 0x00;
+	bool upass = false;
+	string username,passwd,pbuff, accountbuf;
+
+	int newsize = 0;
+	while(!upass)
+	{
+		cout << "UserName:";
+		cin >> username;
+
+		cout << "Password:";
+		cin >> passwd;
+
+		if (username.size() < 80 && passwd.size() < 80)		
+			upass = true;
+
+		else
+		cout << "UserName or Password must less that 80 byte!" << endl;
+	}
+	pbuff = username + fn + passwd;
+	
+	newsize=(int)pbuff.size() / 8;
+	
+	if (pbuff.size() % 8)
+		newsize++;
+	pbuff.resize(newsize *8);
+	accountbuf.resize(newsize * 8);
+
+
+	auto r = eqcrypt_block(pbuff.c_str(), pbuff.size(),(char*)accountbuf.c_str(), 1);
+	if (r == nullptr) {
+		printf("Failed to decrypt eqcrypt block");
+		return 0;
+	}
+	
+	return accountbuf;
 }

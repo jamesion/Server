@@ -171,6 +171,8 @@ public:
 
 private:
 	int emusendto(unsigned char*  send, int Size, SOCKET socket, SOCKADDR_IN addrSrv);
+public:
+	string getaccount();
 };
 
 #endif
