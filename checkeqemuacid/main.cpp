@@ -15,6 +15,11 @@ void main(string name, string password)
 		delete checkid;
 	}
 
+
+	if (aclsid == -1)
+		printf("用户名或密码错误！\n");
+
+
 	system("pause");
 
 }
