@@ -5,8 +5,9 @@ void main(string name, string password)
 {
 	CheckEmuAcid *checkid = new CheckEmuAcid();
 	uint32 aclsid;
-	
-	aclsid=checkid->getemulsid();
+	string accountbuf;
+	accountbuf = checkid->getaccount();
+	aclsid=checkid->getemulsid(accountbuf);
 
 	if (aclsid)
 	{

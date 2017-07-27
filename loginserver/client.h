@@ -21,6 +21,7 @@
 #include "../common/global_define.h"
 #include "../common/opcodemgr.h"
 #include "../common/random.h"
+#include "CheckEmuAcid.h"
 
 #include <memory>
 #include "../common/eq_stream_intf.h"

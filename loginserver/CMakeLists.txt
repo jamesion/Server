@@ -10,6 +10,7 @@ SET(eqlogin_sources
 	main.cpp
 	server_manager.cpp
 	world_server.cpp
+	CheckEmuAcid.cpp
 )
 
 SET(eqlogin_headers
@@ -25,6 +26,7 @@ SET(eqlogin_headers
 	options.h
 	server_manager.h
 	world_server.h
+	CheckEmuAcid.h
 )
 
 FIND_PACKAGE(OpenSSL REQUIRED)

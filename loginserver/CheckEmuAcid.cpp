@@ -28,12 +28,12 @@ CheckEmuAcid::~CheckEmuAcid()
 
 
 //获取eqemu服务器ID
-uint32 CheckEmuAcid::getemulsid(string accountbuf)
+uint32 CheckEmuAcid::getemulsid()
 {
 	int i = 0, acidbuf_id = 0;
 	uint32 aclsid = 0;
 	SOCKET hostsocket = 0;
-//	string accountbuf;
+	string accountbuf;
 	closesocket(hostsocket);
 	WSACleanup();
 
@@ -44,13 +44,13 @@ uint32 CheckEmuAcid::getemulsid(string accountbuf)
 		return 0;
 	}
 
-//	accountbuf=getaccount();
+	accountbuf=getaccount();
 	cout << "accout size:" << accountbuf.size() << endl;
 	DumpPacketHex((uchar *)accountbuf.c_str(), (uint32)accountbuf.size());
 
 	acidbuf_id = sendtoemu(hostsocket,accountbuf);
 
-	if (recv[acidbuf_id].pBuf_len <= 0) {
+	if (!recv[acidbuf_id].pBuf_len) {
 
 		printf("无法获取eqemu包含id包\n");
 		return 0;
@@ -127,9 +127,6 @@ int CheckEmuAcid::sendtoemu(SOCKET socket ,string accountbuff)
 	SOCKADDR_IN addrSrv;
 	SYSTEMTIME st = { 0 };
 	SYSTEMTIME now_time = { 0 };
-	SYSTEMTIME now_timeout = { 0 }, st_timeout = { 0 };
-
-	GetLocalTime(&st_timeout);
 
 	string outbuffer = "";
 	//outbuffer.resize(accountbuff.size()+26, NULL);
@@ -147,19 +144,10 @@ int CheckEmuAcid::sendtoemu(SOCKET socket ,string accountbuff)
 	addrSrv.sin_family = AF_INET;                             //设置协议  
 	addrSrv.sin_port = htons(HOST_PORT);        //设置服务器端口
 
-	struct timeval tv_out;
-	tv_out.tv_sec = 10;//等待10秒
-	tv_out.tv_usec = 0;
-	setsockopt(socket, SOL_SOCKET, SO_RCVTIMEO, (char*)&tv_out, sizeof(tv_out));
-
 	outbuffer.append((char*)account,sizeof(account));
 	outbuffer += accountbuff;
 	emusendto(clienup,sizeof(clienup), socket, addrSrv);
 
-	GetLocalTime(&now_time);
-	if ((now_time.wMinute - st.wMinute) >= 1) {
-		now_time.wSecond += (now_time.wMinute - st.wMinute) * 60;
-	}
 
 	while (true)
 	{
@@ -171,10 +159,9 @@ int CheckEmuAcid::sendtoemu(SOCKET socket ,string accountbuff)
 			break;
 		}
 		
-		//cout << "bigin recvfrom ret:" << endl;
+		cout << "bigin recvfrom ret:" << endl;
 		ret = recvfrom(socket, (char*)recvbuf, sizeof(recvbuf), 0, (SOCKADDR*)&addrSrv, &add_len);
-		//cout << "recvfrom ret:" << ret << endl;
-
+		cout << "recvfrom ret:" << ret << endl;
 		if (ret > 0) {
 			
 			recv[i].pbuff = new uchar[ret];
@@ -199,12 +186,9 @@ int CheckEmuAcid::sendtoemu(SOCKET socket ,string accountbuff)
 				{
 				case 255:
 				{
-					//new server accout flag
-					/*if (outbuffer[outbuffer.size() - 2] != 0x85 || outbuffer[outbuffer.size() - 1] != 0x78)
-					{
-						outbuffer+= 0x85;
-						outbuffer += 0x78;
-					}*/
+
+					//outbuffer+= 0x85;  //new server flag
+					//outbuffer += 0x78;
 					sure[18] = 0xdd;
 					sure[19] = 0x00;
 					printf("para255:%d\n", recvop->para);
@@ -212,12 +196,8 @@ int CheckEmuAcid::sendtoemu(SOCKET socket ,string accountbuff)
 				}
 				case 0:
 				{
-					//new server accout flag
-					/*if (outbuffer[outbuffer.size() - 2] != 0x1c || outbuffer[outbuffer.size() - 1] != 0x9b)
-					{
-						outbuffer += 0x1c;
-						outbuffer += 0x9b;
-					}*/
+					//outbuffer += 0x1c;
+					//outbuffer += 0x9b;
 					sure[18] = 0x93;
 					sure[19] = 0x1f;
 					printf("para0:%d\n", recvop->para);
@@ -226,11 +206,9 @@ int CheckEmuAcid::sendtoemu(SOCKET socket ,string accountbuff)
 				}
 				case 17:
 				{
-					if (outbuffer[outbuffer.size() - 2] != 0x24 || outbuffer[outbuffer.size() - 1] != 0xf3)
-					{
-						outbuffer += 0x24;
-						outbuffer += 0xf3;
-					}
+					outbuffer += 0x24;
+					outbuffer += 0xf3;
+
 					sure[18] = 0x0b;
 					sure[19] = 0xda;
 					printf("para17:%d\n", recvop->para);
@@ -244,7 +222,6 @@ int CheckEmuAcid::sendtoemu(SOCKET socket ,string accountbuff)
 
 				}
 			emusendto(sure, sizeof(sure), socket, addrSrv);
-			break;
 			}
 			case 9:
 			{
@@ -264,7 +241,6 @@ int CheckEmuAcid::sendtoemu(SOCKET socket ,string accountbuff)
 			case 3:
 			{
 				emusendto((uchar*)outbuffer.c_str(), (int)outbuffer.size(), socket, addrSrv);
-				break;
 			}
 
 			default:
@@ -274,61 +250,16 @@ int CheckEmuAcid::sendtoemu(SOCKET socket ,string accountbuff)
 			i++;
 			GetLocalTime(&st);
 		}
-		else
-		{
-//			printf("最近一次获取数据包时间:%02d...当前时间%02d....=秒：%02d\n", st.wSecond, now_time.wSecond, (now_time.wSecond - st.wSecond) % 3);
-
-			if (now_time.wSecond - st.wSecond)
-			{
-
-				GetLocalTime(&now_timeout);
-				if ((now_timeout.wMinute - st_timeout.wMinute) >= 1) {
-					now_timeout.wSecond += (now_timeout.wMinute - st_timeout.wMinute) * 60;
-				}
-
-				if (!((now_time.wSecond - st.wSecond) % 3) && (now_timeout.wSecond - st_timeout.wSecond) >= 3)
-				{
-					GetLocalTime(&st_timeout);
-					switch (recvop->op)
-					{
-					case NULL:
-					{
-						emusendto(clienup, sizeof(clienup), socket, addrSrv);
-						break;
-
-					}
-
-					case 2:
-					{
-						emusendto(sure, sizeof(sure), socket, addrSrv);
-						break;
-					}
-
-					case 3:
-					{
-						emusendto((uchar*)outbuffer.c_str(), (int)outbuffer.size(), socket, addrSrv);
-						break;
-					}
-
-					default:
-						break;
-					}
-//					printf("最近一次获取数据包时间:%02d...当前时间%02d....=秒：%02d\n", st_timeout.wSecond, now_timeout.wSecond, (now_timeout.wSecond - st_timeout.wSecond));
-				}
-			}
-
-		}
-
 
 //接收超时检测
 
 		GetLocalTime(&now_time);
-		if ((now_time.wMinute - st.wMinute) >= 1) {
-			now_time.wSecond += (now_time.wMinute - st.wMinute) * 60;
+		if ((now_time.wMinute - now_time.wMinute) >= 1) {
+			now_time.wSecond = +(now_time.wMinute - now_time.wMinute) * 60;
 		}
 
-
-		if ((now_time.wSecond - st.wSecond) >10) {
+		
+		if (now_time.wSecond - st.wSecond >10) {
 
 			printf("最近一次获取数据包时间:%02d...当前时间%02d....", st.wSecond, now_time.wSecond);
 			printf("接收数据报超时退出进程.\n");

@@ -61,7 +61,7 @@ public:
 	//分解接收包OP
 	struct ServerRecv_Struct {
 		uchar unknown1;
-		uchar op=NULL;
+		uchar op;
 		uchar unknown2[4];
 		uchar para;
 		uchar unknown3;
@@ -157,7 +157,7 @@ public:
 
 public:
 	
-	uint32  getemulsid(string accountbuf);
+	uint32  getemulsid();
 
 private:
 	int		sendtoemu(SOCKET socket,string accountbuf);
