@@ -95,7 +95,9 @@ EQApplicationPacket *EQ::Net::EQStream::PopPacket() {
 	if (m_packet_queue.empty()) {
 		return nullptr;
 	}
-	printf("m_opcode_manager=nullptr");
+
+//	printf("m_opcode_manager=nullptr");
+
 	if (m_opcode_manager != nullptr && *m_opcode_manager != nullptr) {
 		auto &p = m_packet_queue.front();
 		uint16 opcode = 0;

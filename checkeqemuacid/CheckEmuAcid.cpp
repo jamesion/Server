@@ -8,40 +8,35 @@
 #include <iostream>
 #include <string>
  
-
-
-
 CheckEmuAcid::CheckEmuAcid()
 {
-
 }
-
 
 CheckEmuAcid::~CheckEmuAcid()
-{
-	
+{	
+
 }
 
-
-
-
-
-
 //获取eqemu服务器ID
-uint32 CheckEmuAcid::getemulsid(string accountbuf)
+int32 CheckEmuAcid::getemulsid(string account,bool needcrypto)
 {
 	int i = 0, acidbuf_id = 0;
 	uint32 aclsid = 0;
 	SOCKET hostsocket = 0;
-//	string accountbuf;
+	string accountbuf;
 	closesocket(hostsocket);
 	WSACleanup();
+
+	if (needcrypto)
+	{
+		accountbuf = getaccount(account);
+	}
 
 	if (!(hostsocket = connountto()))
 	{
 		cout << "Socket建立失败!!" << endl;
 		closesocket(hostsocket);
-		return 0;
+		return -1;
 	}
 
 //	accountbuf=getaccount();
@@ -53,7 +48,13 @@ uint32 CheckEmuAcid::getemulsid(string accountbuf)
 	if (recv[acidbuf_id].pBuf_len <= 0) {
 
 		printf("无法获取eqemu包含id包\n");
-		return 0;
+		for (i = 0; i <= acidbuf_id; i++)
+		{
+			//printf("delete recv[%d]!\n",i);
+			delete recv[i].pbuff;
+			//printf("deleted!\n");
+		}
+		return -1;
 	}
 	else
 	{
@@ -74,6 +75,7 @@ uint32 CheckEmuAcid::getemulsid(string accountbuf)
 
 	}
 
+	shutdown(hostsocket, SD_BOTH);
 	WSACleanup();
 	closesocket(hostsocket);
 
@@ -127,18 +129,21 @@ int CheckEmuAcid::sendtoemu(SOCKET socket ,string accountbuff)
 	SOCKADDR_IN addrSrv;
 	SYSTEMTIME st = { 0 };
 	SYSTEMTIME now_time = { 0 };
-	SYSTEMTIME now_timeout = { 0 }, st_timeout = { 0 };
-
-	GetLocalTime(&st_timeout);
+//	SYSTEMTIME now_timeout = { 0 }, st_timeout = { 0 };
+	int times=0;
+//	GetLocalTime(&st_timeout);
 
 	string outbuffer = "";
+	string pOut;
+
 	//outbuffer.resize(accountbuff.size()+26, NULL);
 	
 	ServerRecv_Struct *recvop = new ServerRecv_Struct;
 	GetLocalTime(&st);
-
-	int ret, i = 0, j = 0, add_len = 0;
-
+	recvop->op = 0;
+	int ret, i = -1, j = 0, add_len = 0, actimes = 0;
+	uint32 key = 0;
+	uint32 size;
 	add_len = sizeof(SOCKADDR_IN);
 
 	
@@ -152,31 +157,36 @@ int CheckEmuAcid::sendtoemu(SOCKET socket ,string accountbuff)
 	tv_out.tv_usec = 0;
 	setsockopt(socket, SOL_SOCKET, SO_RCVTIMEO, (char*)&tv_out, sizeof(tv_out));
 
+
+	outbuffer.append((char*)accounthead, sizeof(accounthead));
+	itoa(accountbuff.size() , (char*)&outbuffer[7], 16);
 	outbuffer.append((char*)account,sizeof(account));
 	outbuffer += accountbuff;
-	emusendto(clienup,sizeof(clienup), socket, addrSrv);
+//	emusendto(clienup,sizeof(clienup), socket, addrSrv);
 
-	GetLocalTime(&now_time);
+//	GetLocalTime(&now_time);
 	if ((now_time.wMinute - st.wMinute) >= 1) {
 		now_time.wSecond += (now_time.wMinute - st.wMinute) * 60;
 	}
 
 	while (true)
 	{
-		
-		if (i > 10)
+		int intcrc,htoncrc;
+		if (i >= 20)
 		{
-			recv[i - 1].pBuf_len = 0;
-			recv[i-1].getlsid = false;
+			recv[i].pBuf_len = 0;
+			recv[i].pbuff = new uchar;
+			recv[i].getlsid = false;
 			break;
 		}
 		
 		//cout << "bigin recvfrom ret:" << endl;
 		ret = recvfrom(socket, (char*)recvbuf, sizeof(recvbuf), 0, (SOCKADDR*)&addrSrv, &add_len);
-		//cout << "recvfrom ret:" << ret << endl;
+		cout << "recvfrom ret:" << ret << endl;
 
 		if (ret > 0) {
-			
+
+			i++;
 			recv[i].pbuff = new uchar[ret];
 			recv[i].pBuf_len = ret;
 
@@ -188,137 +198,78 @@ int CheckEmuAcid::sendtoemu(SOCKET socket ,string accountbuff)
 			cout << endl;
 
 			recvop = (ServerRecv_Struct*)recv[i].pbuff;
-			printf("recvop=%d,%d\n",(int)recvop->op, recvop->para);
-			
+			printf("recvop=%d\n", (int)recvop->op);
+
+			GetLocalTime(&st);
+
+		}
 			switch (recvop->op)
 			{
-			
+			case 0:
+				emusendto((char*)clienup, sizeof(clienup), socket, addrSrv);
+				break;
+
 			case 2:
-			{
-				switch (recvop->para)
-				{
-				case 255:
-				{
-					//new server accout flag
-					/*if (outbuffer[outbuffer.size() - 2] != 0x85 || outbuffer[outbuffer.size() - 1] != 0x78)
-					{
-						outbuffer+= 0x85;
-						outbuffer += 0x78;
-					}*/
-					sure[18] = 0xdd;
-					sure[19] = 0x00;
-					printf("para255:%d\n", recvop->para);
-					break;
-				}
-				case 0:
-				{
-					//new server accout flag
-					/*if (outbuffer[outbuffer.size() - 2] != 0x1c || outbuffer[outbuffer.size() - 1] != 0x9b)
-					{
-						outbuffer += 0x1c;
-						outbuffer += 0x9b;
-					}*/
-					sure[18] = 0x93;
-					sure[19] = 0x1f;
-					printf("para0:%d\n", recvop->para);
-					break;
 
-				}
-				case 17:
-				{
-					if (outbuffer[outbuffer.size() - 2] != 0x24 || outbuffer[outbuffer.size() - 1] != 0xf3)
-					{
-						outbuffer += 0x24;
-						outbuffer += 0xf3;
-					}
-					sure[18] = 0x0b;
-					sure[19] = 0xda;
-					printf("para17:%d\n", recvop->para);
-					break;
+				key = EQ::Net::NetworkToHost(recvop->para);
 
-				}
-
-				default:
-					break;
-
-
-				}
-			emusendto(sure, sizeof(sure), socket, addrSrv);
+				pOut.clear();
+				pOut.append((char*)sure,sizeof(sure));
+				intcrc = EQ::Crc32(pOut.c_str(), (int)pOut.size(), key) & 0xffff;
+				//htoncrc =EQ::Net::HostToNetwork((uint16_t)intcrc);
+				pOut += intcrc >> 8;
+				pOut += intcrc;
+				printf("intcrc:%d,key:%d\n", intcrc, key);
+				emusendto((char*)pOut.c_str(), (int)pOut.size(), socket, addrSrv);
 			break;
-			}
+			
 			case 9:
-			{
-				//if (recvop->para == 2)
-					//emusendto((uchar*)outbuffer.c_str(), (int)outbuffer.size(), socket, addrSrv);
+			
+				if (recvop->para == 2)
+				{
+
+					pOut.clear();
+					pOut.append((char*)account, sizeof(account));
+					pOut += accountbuff;
+
+					intcrc = EQ::Crc32(pOut.c_str(), (int)pOut.size(), key) & 0xffff;
+					//htoncrc =EQ::Net::HostToNetwork((uint16_t)intcrc);
+					pOut += intcrc >> 8;
+					pOut += intcrc;
+					emusendto((char*)pOut.c_str(), (int)pOut.size(), socket, addrSrv);
+
+
+				}
 				if (recvop->para == 3)
 				{
-					emusendto(end0, sizeof(end0), socket, addrSrv);
-					emusendto(end1, sizeof(end1), socket, addrSrv);
-					emusendto(end2, sizeof(end2), socket, addrSrv);
-					emusendto(end3, sizeof(end3), socket, addrSrv);
+					emusendto((char*)end0, sizeof(end0), socket, addrSrv);
+					emusendto((char*)end1, sizeof(end1), socket, addrSrv);
+					emusendto((char*)end2, sizeof(end2), socket, addrSrv);
+					emusendto((char*)end3, sizeof(end3), socket, addrSrv);
 					recv[i].getlsid = true;
 					return i;
 				}
 				break;
-			}
+			
 			case 3:
-			{
-				emusendto((uchar*)outbuffer.c_str(), (int)outbuffer.size(), socket, addrSrv);
-				break;
-			}
+					pOut.clear();
+					pOut = outbuffer;
+					intcrc = EQ::Crc32(pOut.c_str(), (int)pOut.size(), key) & 0xffff;
+					//htoncrc =EQ::Net::HostToNetwork((uint16_t)intcrc);
+					pOut += intcrc >> 8;
+					pOut += intcrc;
 
+					emusendto((char*)pOut.c_str(), (int)pOut.size(), socket, addrSrv);
+					//emusendto((char*)outbuffer.c_str(), (int)outbuffer.size(), socket, addrSrv);
+				break;
+			
 			default:
 				break;
 			}
 
-			i++;
-			GetLocalTime(&st);
-		}
-		else
-		{
-//			printf("最近一次获取数据包时间:%02d...当前时间%02d....=秒：%02d\n", st.wSecond, now_time.wSecond, (now_time.wSecond - st.wSecond) % 3);
+			
 
-			if (now_time.wSecond - st.wSecond)
-			{
-
-				GetLocalTime(&now_timeout);
-				if ((now_timeout.wMinute - st_timeout.wMinute) >= 1) {
-					now_timeout.wSecond += (now_timeout.wMinute - st_timeout.wMinute) * 60;
-				}
-
-				if (!((now_time.wSecond - st.wSecond) % 3) && (now_timeout.wSecond - st_timeout.wSecond) >= 3)
-				{
-					GetLocalTime(&st_timeout);
-					switch (recvop->op)
-					{
-					case NULL:
-					{
-						emusendto(clienup, sizeof(clienup), socket, addrSrv);
-						break;
-
-					}
-
-					case 2:
-					{
-						emusendto(sure, sizeof(sure), socket, addrSrv);
-						break;
-					}
-
-					case 3:
-					{
-						emusendto((uchar*)outbuffer.c_str(), (int)outbuffer.size(), socket, addrSrv);
-						break;
-					}
-
-					default:
-						break;
-					}
-//					printf("最近一次获取数据包时间:%02d...当前时间%02d....=秒：%02d\n", st_timeout.wSecond, now_timeout.wSecond, (now_timeout.wSecond - st_timeout.wSecond));
-				}
-			}
-
-		}
-
+		
 
 //接收超时检测
 
@@ -327,23 +278,30 @@ int CheckEmuAcid::sendtoemu(SOCKET socket ,string accountbuff)
 			now_time.wSecond += (now_time.wMinute - st.wMinute) * 60;
 		}
 
-
-		if ((now_time.wSecond - st.wSecond) >10) {
+		if ((now_time.wSecond - st.wSecond) >=10) {
 
 			printf("最近一次获取数据包时间:%02d...当前时间%02d....", st.wSecond, now_time.wSecond);
 			printf("接收数据报超时退出进程.\n");
 
+				recv[i].pBuf_len = 0;
+				recv[i].pbuff = new uchar;
+				recv[i].getlsid = false;
+		
 			break;
 			}
 
 
+			Sleep(1000);
+		
 		}
 
 
-	//emusendto(end1, sizeof(end1), socket, addrSrv);
-	//emusendto(end2, sizeof(end2), socket, addrSrv);
-
-		return i-1;
+		emusendto((char*)end0, sizeof(end0), socket, addrSrv);
+		emusendto((char*)end1, sizeof(end1), socket, addrSrv);
+		emusendto((char*)end2, sizeof(end2), socket, addrSrv);
+		emusendto((char*)end3, sizeof(end3), socket, addrSrv);
+	printf("返回i:%d\n", i);
+		return i;
 
 	} 
 
@@ -510,6 +468,40 @@ uint32 CheckEmuAcid::cryptoidbuff(int acidbuf_id)
 
 }
 
+string CheckEmuAcid::getaccount(string account)
+{
+	string  pbuff, accountbuf;
+
+	int newsize = 0;
+	if (account == "")
+	{
+		cout << "UserName is NULL!" << endl;
+		return 0;
+	}
+
+		if (account.size() > 160)
+		{
+			cout << "Account size must less that 160 byte!" << endl;
+		}
+		pbuff = account;
+
+	newsize = (int)pbuff.size() / 8;
+
+	if (pbuff.size() % 8)
+		newsize++;
+	pbuff.resize(newsize * 8);
+	accountbuf.resize(newsize * 8);
+
+
+	auto r = eqcrypt_block(pbuff.c_str(), pbuff.size(), (char*)accountbuf.c_str(), 1);
+	if (r == nullptr) {
+		printf("Failed to decrypt eqcrypt block");
+		return 0;
+	}
+
+	return accountbuf;
+	return string();
+}
 
 
 
@@ -517,16 +509,19 @@ uint32 CheckEmuAcid::cryptoidbuff(int acidbuf_id)
 
 
 
-int CheckEmuAcid::emusendto(unsigned char* send, int Size,SOCKET socket, SOCKADDR_IN addrSrv)
+
+int CheckEmuAcid::emusendto(char* send, int Size,SOCKET socket, SOCKADDR_IN addrSrv)
 {
 	printf("尝试发送数据包到emu...\n");
 
-	sendto(socket, (char*)send, Size, 0, (SOCKADDR*)&addrSrv, sizeof(SOCKADDR));
+	sendto(socket, send, Size, 0, (SOCKADDR*)&addrSrv, sizeof(SOCKADDR));
+
 
 	cout << "请求数据报:" << "        size(" <<  Size  << ")" << endl;
 	DumpPacketHex((uchar *)send, Size);
 	return 0;
 }
+
 
 string CheckEmuAcid::getaccount()
 {

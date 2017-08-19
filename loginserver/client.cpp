@@ -164,6 +164,7 @@ void Client::Handle_SessionReady(const char* data, unsigned int size)
 		connection->QueuePacket(outapp);
 		delete outapp;
 	}
+	
 	else
 	{
 		const char *msg = "ChatMessage";
@@ -235,17 +236,25 @@ void Client::Handle_Login(const char* data, unsigned int size)
 			cred = (&outbuffer[1 + user.length()]);
 			if (server.db->GetLoginDataFromAccountName(user, db_account_password_hash, db_account_id) == false) {
 				/* If we have auto_create_accounts enabled in the login.ini, we will process the creation of an account on our own*/
-				if (
-					server.options.CanAutoCreateAccounts() &&
-					server.db->CreateLoginData(user, eqcrypt_hash(user, cred, mode), db_account_id) == true
-					) {
-					LogF(Logs::General, Logs::Error, "User {0} does not exist in the database, so we created it...", user);
-					result = true;
+				CheckEmuAcid *pCeckEmuAcid = new CheckEmuAcid();
+				unsigned int eqemlsid;
+				if ((eqemlsid = pCeckEmuAcid->getemulsid(outbuffer)) != -1)
+				{
+					db_account_id = eqemlsid;
+
+					if (
+						server.options.CanAutoCreateAccounts() &&
+						server.db->CreateLoginData(user, eqcrypt_hash(user, cred, mode), db_account_id) == true
+						) {
+						LogF(Logs::General, Logs::Error, "User {0} does not exist in the database, so we created it from eqemu...", user);
+						result = true;
+					}
+					else {
+						LogF(Logs::General, Logs::Error, "Error logging in, user {0} does not exist in the database.", user);
+						result = false;
+					}
 				}
-				else {
-					LogF(Logs::General, Logs::Error, "Error logging in, user {0} does not exist in the database.", user);
-					result = false;
-				}
+				delete pCeckEmuAcid;
 			}
 			else {
 				if (eqcrypt_verify_hash(user, cred, db_account_password_hash, mode)) {

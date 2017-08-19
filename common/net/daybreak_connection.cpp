@@ -853,6 +853,7 @@ bool EQ::Net::DaybreakConnection::PacketCanBeEncoded(Packet &p) const
 void EQ::Net::DaybreakConnection::Decode(Packet &p, size_t offset, size_t length)
 {
 	int key = m_encode_key;
+	
 	char *buffer = (char*)p.Data() + offset;
 
 	size_t i = 0;
