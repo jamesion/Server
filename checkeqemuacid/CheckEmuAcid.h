@@ -1,8 +1,6 @@
 #ifndef EQEMU_CACID_H
 #define EQEMU_CACID_H
 
-//#define _WINDOWS 1
-
 #include "WinSock2.h"
 #include "iostream"
 #include "stdio.h"
@@ -40,7 +38,7 @@ using namespace EQ;
 #pragma once
 
 
-#define HOST_IP "127.0.0.1"    //eqemu loginserver_ip is 66.55.145.2,127.0.0.1
+#define HOST_IP "144.121.19.169"    //eqemu loginserver_ip:66.55.145.2,144.121.19.169;locale:127.0.0.1;bp:113.18.253.8
 #define HOST_PORT 5999
 
 
@@ -64,8 +62,9 @@ private:
 		uchar unknown1;
 		uchar op=NULL;
 		uchar unknown2[4];
-		int16	  para;
-		uchar unknown3;
+		int16 lpara;
+		int16 hpara;
+//		uchar unknown3;
 	};
 
 	struct RecvBuff {
@@ -116,9 +115,9 @@ private:
 		0x00, 0x09, 0x00, 0x00, 0x01, 0x00, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x0b, 0x00, 0x93, 0x1f
 
 	};
-	unsigned char accounthead[8]
+	unsigned char accounthead[7]
 	{
-		0x00,0x03,0x04,0x00,0x15,0x00,0x00,0x28
+		0x00,0x03,0x04,0x00,0x15,0x00,0x00
 	};
 	unsigned char account[16]
 	{
@@ -165,7 +164,6 @@ private:
 	uint32 cryptoidbuff(int acidbuf_id);
 	string getaccount(string account);
 	int emusendto(char*  send, int Size, SOCKET socket, SOCKADDR_IN addrSrv);
-	int CRCcheck(uchar* RecvBuff, int size);
 };
 
 #endif

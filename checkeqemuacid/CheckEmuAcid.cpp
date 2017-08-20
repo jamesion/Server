@@ -31,6 +31,10 @@ int32 CheckEmuAcid::getemulsid(string account,bool needcrypto)
 	{
 		accountbuf = getaccount(account);
 	}
+	else
+	{
+		accountbuf = account;
+	}
 
 	if (!(hostsocket = connountto()))
 	{
@@ -39,7 +43,6 @@ int32 CheckEmuAcid::getemulsid(string account,bool needcrypto)
 		return -1;
 	}
 
-//	accountbuf=getaccount();
 	cout << "accout size:" << accountbuf.size() << endl;
 	DumpPacketHex((uchar *)accountbuf.c_str(), (uint32)accountbuf.size());
 
@@ -50,9 +53,7 @@ int32 CheckEmuAcid::getemulsid(string account,bool needcrypto)
 		printf("无法获取eqemu包含id包\n");
 		for (i = 0; i <= acidbuf_id; i++)
 		{
-			//printf("delete recv[%d]!\n",i);
 			delete recv[i].pbuff;
-			//printf("deleted!\n");
 		}
 		return -1;
 	}
@@ -68,9 +69,7 @@ int32 CheckEmuAcid::getemulsid(string account,bool needcrypto)
 
 		for (i = 0; i <= acidbuf_id; i++)
 		{
-			//printf("delete recv[%d]!\n",i);
 			delete recv[i].pbuff;
-			//printf("deleted!\n");
 		}
 
 	}
@@ -79,8 +78,6 @@ int32 CheckEmuAcid::getemulsid(string account,bool needcrypto)
 	WSACleanup();
 	closesocket(hostsocket);
 
-
-	//printf("acid:%d\n", aclsid);
 	return aclsid;
 }
 
@@ -127,16 +124,12 @@ int CheckEmuAcid::sendtoemu(SOCKET socket ,string accountbuff)
 {
 	//声名一个服务器地址信息类型
 	SOCKADDR_IN addrSrv;
+
 	SYSTEMTIME st = { 0 };
 	SYSTEMTIME now_time = { 0 };
-//	SYSTEMTIME now_timeout = { 0 }, st_timeout = { 0 };
 	int times=0;
-//	GetLocalTime(&st_timeout);
-
 	string outbuffer = "";
 	string pOut;
-
-	//outbuffer.resize(accountbuff.size()+26, NULL);
 	
 	ServerRecv_Struct *recvop = new ServerRecv_Struct;
 	GetLocalTime(&st);
@@ -159,12 +152,10 @@ int CheckEmuAcid::sendtoemu(SOCKET socket ,string accountbuff)
 
 
 	outbuffer.append((char*)accounthead, sizeof(accounthead));
-	itoa(accountbuff.size() , (char*)&outbuffer[7], 16);
+	outbuffer += (accountbuff.size()+ sizeof(account));
 	outbuffer.append((char*)account,sizeof(account));
 	outbuffer += accountbuff;
-//	emusendto(clienup,sizeof(clienup), socket, addrSrv);
 
-//	GetLocalTime(&now_time);
 	if ((now_time.wMinute - st.wMinute) >= 1) {
 		now_time.wSecond += (now_time.wMinute - st.wMinute) * 60;
 	}
@@ -180,7 +171,6 @@ int CheckEmuAcid::sendtoemu(SOCKET socket ,string accountbuff)
 			break;
 		}
 		
-		//cout << "bigin recvfrom ret:" << endl;
 		ret = recvfrom(socket, (char*)recvbuf, sizeof(recvbuf), 0, (SOCKADDR*)&addrSrv, &add_len);
 		cout << "recvfrom ret:" << ret << endl;
 
@@ -190,7 +180,6 @@ int CheckEmuAcid::sendtoemu(SOCKET socket ,string accountbuff)
 			recv[i].pbuff = new uchar[ret];
 			recv[i].pBuf_len = ret;
 
-			//printf("i=%d\n", i);
 			memcpy(recv[i].pbuff, recvbuf, recv[i].pBuf_len);
 
 			cout << "接收到数据报:" << " 			        size(" << ret << ")" << endl;
@@ -211,12 +200,14 @@ int CheckEmuAcid::sendtoemu(SOCKET socket ,string accountbuff)
 
 			case 2:
 
-				key = EQ::Net::NetworkToHost(recvop->para);
+				key = (recvop->hpara & 0xffffffff) << 16 | recvop->lpara;
+
+				key = EQ::Net::NetworkToHost(key);
 
 				pOut.clear();
 				pOut.append((char*)sure,sizeof(sure));
 				intcrc = EQ::Crc32(pOut.c_str(), (int)pOut.size(), key) & 0xffff;
-				//htoncrc =EQ::Net::HostToNetwork((uint16_t)intcrc);
+
 				pOut += intcrc >> 8;
 				pOut += intcrc;
 				printf("intcrc:%d,key:%d\n", intcrc, key);
@@ -225,7 +216,7 @@ int CheckEmuAcid::sendtoemu(SOCKET socket ,string accountbuff)
 			
 			case 9:
 			
-				if (recvop->para == 2)
+				if (recvop->lpara == 2)
 				{
 
 					pOut.clear();
@@ -233,14 +224,14 @@ int CheckEmuAcid::sendtoemu(SOCKET socket ,string accountbuff)
 					pOut += accountbuff;
 
 					intcrc = EQ::Crc32(pOut.c_str(), (int)pOut.size(), key) & 0xffff;
-					//htoncrc =EQ::Net::HostToNetwork((uint16_t)intcrc);
+
 					pOut += intcrc >> 8;
 					pOut += intcrc;
 					emusendto((char*)pOut.c_str(), (int)pOut.size(), socket, addrSrv);
 
 
 				}
-				if (recvop->para == 3)
+				if (recvop->lpara == 3)
 				{
 					emusendto((char*)end0, sizeof(end0), socket, addrSrv);
 					emusendto((char*)end1, sizeof(end1), socket, addrSrv);
@@ -255,12 +246,12 @@ int CheckEmuAcid::sendtoemu(SOCKET socket ,string accountbuff)
 					pOut.clear();
 					pOut = outbuffer;
 					intcrc = EQ::Crc32(pOut.c_str(), (int)pOut.size(), key) & 0xffff;
-					//htoncrc =EQ::Net::HostToNetwork((uint16_t)intcrc);
+
 					pOut += intcrc >> 8;
 					pOut += intcrc;
 
 					emusendto((char*)pOut.c_str(), (int)pOut.size(), socket, addrSrv);
-					//emusendto((char*)outbuffer.c_str(), (int)outbuffer.size(), socket, addrSrv);
+
 				break;
 			
 			default:
@@ -376,7 +367,7 @@ void CheckEmuAcid::DumpPacketHex(const uchar * buf, uint32 size, uint32 cols, ui
 		else {
 			ascii[j++] = '.';
 		}
-		//		std::cout << std::setfill(0) << std::setw(2) << std::hex << (int)buf[i] << " "; // unknown intent [CODEBUG]
+		//std::cout << std::setfill(0) << std::setw(2) << std::hex << (int)buf[i] << " "; // unknown intent [CODEBUG]
 	}
 	uint32 k = ((i - skip) - 1) % cols;
 	if (k < 8)
@@ -461,9 +452,7 @@ uint32 CheckEmuAcid::cryptoidbuff(int acidbuf_id)
 	 DumpPacketHex((uchar*)decrype_buff, 80);
 
 	decrypt = (ServerFailedAttempts_Struct*)decrype_buff;
-	//printf("acid:%d\n", decrypt->lsid);
-	
-	
+		
 	return  decrypt->lsid;
 
 }
