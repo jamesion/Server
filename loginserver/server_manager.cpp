@@ -161,7 +161,7 @@ EQApplicationPacket *ServerManager::CreateServerListPacket(Client *c, uint32 seq
 			break;
 		}
 		case 2: {
-			*(unsigned int*)data_pointer = 0x00000009;
+			*(unsigned int*)data_pointer = 0x0000000d;
 			break;
 		}
 		default: {

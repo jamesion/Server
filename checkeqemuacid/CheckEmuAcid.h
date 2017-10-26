@@ -1,8 +1,6 @@
 #ifndef EQEMU_CACID_H
 #define EQEMU_CACID_H
 
-//#define _WINDOWS 1
-
 #include "WinSock2.h"
 #include "iostream"
 #include "stdio.h"
@@ -10,7 +8,8 @@
 //#include "../common/random.h"
 #include "../common/types.h"
 #include "encryption.h"
-//#include "EDecrypt.h"
+#include "../common/net/crc32.h"
+#include "../common/net/daybreak_connection.h"
 
 #ifndef WIN32
 #include "../loginserver/eq_crypto_api.h"
@@ -34,18 +33,18 @@ typedef int32_t int32;
 typedef int64_t int64;
 
 using namespace std;
-
+using namespace EQ;
 
 #pragma once
 
 
-#define HOST_IP "66.55.145.2"    //eqemu loginserver_ip is 66.55.145.2,192.168.43.135
+#define HOST_IP "144.121.19.169"    //eqemu loginserver_ip:66.55.145.2,144.121.19.169;locale:127.0.0.1;bp:113.18.253.8
 #define HOST_PORT 5999
 
 
 class CheckEmuAcid
 {
-public:
+private:
 	unsigned int emu_ac_id;
 	uchar recvbuf[255] = { 0 };
 	//服务器返回准进确认信息存放
@@ -63,8 +62,9 @@ public:
 		uchar unknown1;
 		uchar op=NULL;
 		uchar unknown2[4];
-		uchar para;
-		uchar unknown3;
+		int16 lpara;
+		int16 hpara;
+//		uchar unknown3;
 	};
 
 	struct RecvBuff {
@@ -95,14 +95,6 @@ public:
 		char unknown14[4];	//0x00, 0x00, 0x00, 0x00
 	};
 
-
-
-	CheckEmuAcid();
-	~CheckEmuAcid();
-
-
-
-
  //声明一个发出请求缓存
 	unsigned  char readyrequest[14]  
 	{
@@ -113,9 +105,9 @@ public:
 	{
 		0x00,0x01,0x00,0x00,0x00,0x02,0x0e,0x00,0xac,0x3b,0x00,0x00,0x02,0x00
 	};
-	unsigned  char sure[20]
+	unsigned  char sure[18]
 	{
-		0x00,0x09,0x00,0x00,0x01,0x00,0x02,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x0b,0x00,0xdd,0x00
+		0x00,0x09,0x00,0x00,0x01,0x00,0x02,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x0b,0x00
 	}; 
 	unsigned  char sure0[20]
 	{
@@ -123,18 +115,20 @@ public:
 		0x00, 0x09, 0x00, 0x00, 0x01, 0x00, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x0b, 0x00, 0x93, 0x1f
 
 	};
-	unsigned char account[24]
+	unsigned char accounthead[7]
 	{
-		0x00,0x03,0x04,0x00,0x15,0x00,0x00,0x28,0x00,0x09,0x00,0x01,0x02,0x00,0x03,0x00,0x00,0x00,0x00,0x02,0x00,0x00,
+		0x00,0x03,0x04,0x00,0x15,0x00,0x00
+	};
+	unsigned char account[16]
+	{
+		0x00,0x09,0x00,0x01,0x02,0x00,0x03,0x00,0x00,0x00,0x00,0x02,0x00,0x00,
 
 		0x00,0x00
 		
 	};
 
-	unsigned char end0[4]
-	{
-		0x00,0x15,0x00,0x0f
-	};
+	unsigned char end0[1] { 0x00 };
+
 
 	unsigned char end1[16]
 	{
@@ -151,13 +145,15 @@ public:
 	};
 
 
-	RecvBuff recv[10] = { 0 };
+	RecvBuff recv[20] = { 0 };
 
 	ServerFailedAttempts_Struct *decrypt;
 
 public:
-	
-	uint32  getemulsid(string accountbuf);
+	CheckEmuAcid();
+	~CheckEmuAcid();
+	int32  getemulsid(string account,bool needcrypto=TRUE);
+	string getaccount();
 
 private:
 	int		sendtoemu(SOCKET socket,string accountbuf);
@@ -166,13 +162,8 @@ private:
 	void	DumpPacketHex(const uchar* buf, uint32 size, uint32 cols = 16, uint32 skip = 0);
 	std::string DumpPacketHexToString(const uchar* buf, uint32 size, uint32 cols = 16, uint32 skip = 0);
 	uint32 cryptoidbuff(int acidbuf_id);
-	
-public:
-
-private:
-	int emusendto(unsigned char*  send, int Size, SOCKET socket, SOCKADDR_IN addrSrv);
-public:
-	string getaccount();
+	string getaccount(string account);
+	int emusendto(char*  send, int Size, SOCKET socket, SOCKADDR_IN addrSrv);
 };
 
 #endif

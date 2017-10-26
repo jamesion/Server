@@ -63,6 +63,8 @@ public:
 
 	virtual bool CreateLoginData(const std::string &name, const std::string &password, unsigned int &id);
 
+	virtual bool UpdateLSAccountpasswd(std::string name, std::string db_account_password_hash);
+
 	/**
 	* Retrieves the world registration from the long and short names provided.
 	* Needed for world login procedure.

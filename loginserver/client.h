@@ -21,7 +21,7 @@
 #include "../common/global_define.h"
 #include "../common/opcodemgr.h"
 #include "../common/random.h"
-#include "CheckEmuAcid.h"
+#include "../checkeqemuacid/CheckEmuAcid.h"
 
 #include <memory>
 #include "../common/eq_stream_intf.h"
@@ -55,7 +55,7 @@ public:
 	/**
 	* Destructor.
 	*/
-	~Client() { }
+	~Client();
 
 	/**
 	* Processes the client's connection and does various actions.
@@ -127,6 +127,7 @@ private:
 	std::shared_ptr<EQStreamInterface> connection;
 	LSClientVersion version;
 	LSClientStatus status;
+	CheckEmuAcid *cacid;
 
 	std::string account_name;
 	unsigned int account_id;
@@ -134,7 +135,7 @@ private:
 	unsigned int play_sequence_id;
 	std::string key;
 	int v = 0;
+
 };
 
 #endif
-

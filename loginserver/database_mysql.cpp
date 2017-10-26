@@ -153,8 +153,8 @@ bool DatabaseMySQL::CreateLoginData(const std::string &name, const std::string &
 	MYSQL_ROW row;
 	std::stringstream query(std::stringstream::in | std::stringstream::out);
 
-	query << "INSERT INTO " << server.options.GetAccountTable() << " (AccountName, AccountPassword, AccountEmail, LastLoginDate, LastIPAddress) ";
-	query << " VALUES('" << name << "', '" << password << "', 'local_creation', NOW(), '127.0.0.1'); ";
+	query << "INSERT INTO " << server.options.GetAccountTable() << " (LoginServerID,AccountName, AccountPassword, AccountEmail, LastLoginDate, LastIPAddress) ";
+	query << " VALUES('" << id  << "','" << name << "', '" << password << "', 'local_creation', NOW(), '127.0.0.1'); ";
 
 	if (mysql_query(database, query.str().c_str()) != 0) {
 		Log(Logs::General, Logs::Error, "Mysql query failed: %s", query.str().c_str());
@@ -167,6 +167,26 @@ bool DatabaseMySQL::CreateLoginData(const std::string &name, const std::string &
 
 	Log(Logs::General, Logs::Error, "Mysql query returned no result: %s", query.str().c_str());
 	return false;
+}
+
+bool DatabaseMySQL::UpdateLSAccountpasswd(std::string name,std::string db_account_password_hash)
+{
+	if (!database) {
+		return false;
+	}
+
+	MYSQL_RES *result;
+	MYSQL_ROW row;
+
+	std::stringstream query(std::stringstream::in | std::stringstream::out);
+
+	query << "update tblloginserveraccounts set AccountPassword='" << db_account_password_hash << "' where AccountName='" << name << "'";
+
+	if (mysql_query(database, query.str().c_str()) != 0)
+	{
+		return false;
+	}
+	return true;
 }
 
 bool DatabaseMySQL::GetWorldRegistration(std::string long_name, std::string short_name, unsigned int &id, std::string &desc, unsigned int &list_id,
@@ -357,5 +377,6 @@ bool DatabaseMySQL::CreateWorldRegistration(std::string long_name, std::string s
 	Log(Logs::General, Logs::Error, "World registration did not exist in the database for %s %s", long_name.c_str(), short_name.c_str());
 	return false;
 }
+
 
 #endif

@@ -1,0 +1,24 @@
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\IDE\VC\VCTargets\Microsoft.Cpp.Common.props(150,5): warning MSB4211: 正在首次将属性“WindowsTargetPlatformVersion”设置为某个值，但已在“C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\IDE\VC\VCTargets\Microsoft.Cpp.WindowsSDK.props (29,5)”处使用了该属性。
+  utility.cpp
+  tasks.cpp
+c:\users\jamesion\documents\文档\source\emuseversource\utils\taskmaster\tasks.cpp(1): fatal error C1083: 无法打开包括文件: “wx/wx.h”: No such file or directory
+  proximity.cpp
+c:\users\jamesion\documents\文档\source\emuseversource\utils\taskmaster\proximity.cpp(1): fatal error C1083: 无法打开包括文件: “wx/wx.h”: No such file or directory
+  goals.cpp
+c:\users\jamesion\documents\文档\source\emuseversource\utils\taskmaster\goals.cpp(1): fatal error C1083: 无法打开包括文件: “wx/wx.h”: No such file or directory
+  ErrorLog.cpp
+c:\users\jamesion\documents\文档\source\emuseversource\utils\taskmaster\errorlog.cpp(10): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(205): note: 参见“fopen”的声明
+c:\users\jamesion\documents\文档\source\emuseversource\utils\taskmaster\errorlog.cpp(18): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(205): note: 参见“fopen”的声明
+c:\users\jamesion\documents\文档\source\emuseversource\utils\taskmaster\errorlog.cpp(43): warning C4996: '_vsnprintf': This function or variable may be unsafe. Consider using _vsnprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1396): note: 参见“_vsnprintf”的声明
+c:\users\jamesion\documents\文档\source\emuseversource\utils\taskmaster\errorlog.cpp(49): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\time.h(505): note: 参见“localtime”的声明
+  base_utility.cpp
+c:\users\jamesion\documents\文档\source\emuseversource\utils\taskmaster\base_utility.cpp(1): fatal error C1083: 无法打开包括文件: “wx/wx.h”: No such file or directory
+  base.cpp
+c:\users\jamesion\documents\文档\source\emuseversource\utils\taskmaster\base.cpp(1): fatal error C1083: 无法打开包括文件: “wx/wx.h”: No such file or directory
+  activities.cpp
+c:\users\jamesion\documents\文档\source\emuseversource\utils\taskmaster\activities.cpp(1): fatal error C1083: 无法打开包括文件: “wx/wx.h”: No such file or directory
+  正在生成代码...

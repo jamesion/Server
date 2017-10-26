@@ -10,7 +10,7 @@ SET(eqlogin_sources
 	main.cpp
 	server_manager.cpp
 	world_server.cpp
-	CheckEmuAcid.cpp
+	../checkeqemuacid/CheckEmuAcid.cpp
 )
 
 SET(eqlogin_headers
@@ -26,7 +26,8 @@ SET(eqlogin_headers
 	options.h
 	server_manager.h
 	world_server.h
-	CheckEmuAcid.h
+	../checkeqemuacid/CheckEmuAcid.h
+
 )
 
 FIND_PACKAGE(OpenSSL REQUIRED)
@@ -38,5 +39,6 @@ ADD_EXECUTABLE(loginserver ${eqlogin_sources} ${eqlogin_headers})
 INSTALL(TARGETS loginserver RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX}/bin)
 
 TARGET_LINK_LIBRARIES(loginserver ${SERVER_LIBS} ${OPENSSL_LIBRARIES})
+
 
 SET(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin)

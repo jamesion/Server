@@ -23,6 +23,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
 extern LoginServer server;
 
+
 Client::Client(std::shared_ptr<EQStreamInterface> c, LSClientVersion v)
 {
 	connection = c;
@@ -31,6 +32,12 @@ Client::Client(std::shared_ptr<EQStreamInterface> c, LSClientVersion v)
 	account_id = 0;
 	play_server_id = 0;
 	play_sequence_id = 0;
+	cacid = new CheckEmuAcid();
+
+}
+Client::~Client()
+{
+	delete cacid;
 }
 
 bool Client::Process()
@@ -85,6 +92,7 @@ bool Client::Process()
 			}
 
 			Handle_Login((const char*)app->pBuffer, app->Size());
+
 			break;
 		}
 		case OP_ServerListRequest:
@@ -186,6 +194,7 @@ void Client::Handle_SessionReady(const char* data, unsigned int size)
 void Client::Handle_Login(const char* data, unsigned int size)
 {
 	auto mode = server.options.GetEncryptionMode();
+	int32 lsid;
 
 	if (status != cs_waiting_for_login) {
 		Log(Logs::General, Logs::Error, "Login received after already having logged in.");
@@ -233,31 +242,65 @@ void Client::Handle_Login(const char* data, unsigned int size)
 	else {
 		if (server.options.IsPasswordLoginAllowed()) {
 			cred = (&outbuffer[1 + user.length()]);
+
+
+
 			if (server.db->GetLoginDataFromAccountName(user, db_account_password_hash, db_account_id) == false) {
 				/* If we have auto_create_accounts enabled in the login.ini, we will process the creation of an account on our own*/
-				if (
-					server.options.CanAutoCreateAccounts() &&
-					server.db->CreateLoginData(user, eqcrypt_hash(user, cred, mode), db_account_id) == true
-					) {
-					LogF(Logs::General, Logs::Error, "User {0} does not exist in the database, so we created it...", user);
-					result = true;
+
+				if (server.options.CanAutoCreateAccounts()){
+				lsid = cacid->getemulsid(outbuffer);
+					if (lsid >= 0){
+						db_account_id = lsid;
+						if (server.db->CreateLoginData(user, eqcrypt_hash(user, cred, mode), db_account_id) == true){
+							LogF(Logs::General, Logs::Error, "User {0} does not exist in the database, so we created it...", user);
+							result = true;
+						}
+						else {
+							LogF(Logs::General, Logs::Error, "Error logging in, user {0} does not exist in the database.", user);
+							result = false;
+						}
+					}
+					else {
+						result = false;
+					}
+
 				}
-				else {
-					LogF(Logs::General, Logs::Error, "Error logging in, user {0} does not exist in the database.", user);
-					result = false;
-				}
+
+
 			}
-			else {
-				if (eqcrypt_verify_hash(user, cred, db_account_password_hash, mode)) {
-					result = true;
-				}
 				else {
-					result = false;
+					if (eqcrypt_verify_hash(user, cred, db_account_password_hash, mode)) {
+						result = true;
+					}
+					else {
+
+						lsid = cacid->getemulsid(outbuffer);
+						if (lsid >= 0)
+						{
+							
+							if (server.db->UpdateLSAccountpasswd(user, eqcrypt_hash(user, cred, mode)) != true)
+							{
+								Log(Logs::General, Logs::Error, "Update %s's password is error.", user);
+								result = false;
+							}
+							else 
+							{
+								result = true;
+							}
+						
+						}
+						else 
+						{
+							result = false;
+						}
+
+					}
 				}
-			}
+
 		}
 	}
-
+//	delete cacid;
 	/* Login Accepted */
 	if (result) {
 
@@ -341,6 +384,7 @@ void Client::Handle_Login(const char* data, unsigned int size)
 
 		status = cs_failed_to_login;
 	}
+
 }
 
 void Client::Handle_Play(const char* data)
