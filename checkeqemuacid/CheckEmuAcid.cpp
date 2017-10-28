@@ -18,18 +18,22 @@ CheckEmuAcid::~CheckEmuAcid()
 }
 
 //获取eqemu服务器ID
-int32 CheckEmuAcid::getemulsid(string account,bool needcrypto)
+int32 CheckEmuAcid::getemulsid(string accountbuf,bool needcrypto)
 {
 	int i = 0, acidbuf_id = 0;
 	uint32 aclsid = 0;
 	SOCKET hostsocket = 0;
-	string accountbuf;
+//	string accountbuf;
 	closesocket(hostsocket);
-	WSACleanup();
+//	WSACleanup();
 
 	if (needcrypto)
 	{
-		accountbuf = getaccount(account);
+		auto r = eqcrypt_block(accountbuf.c_str(), accountbuf.size(), (char*)accountbuf.c_str(), 1);
+		if (r == nullptr) {
+			printf("Failed to decrypt eqcrypt block");
+			return 0;
+		}
 	}
 
 	if (!(hostsocket = connountto()))
@@ -76,7 +80,6 @@ int32 CheckEmuAcid::getemulsid(string account,bool needcrypto)
 	}
 
 	shutdown(hostsocket, SD_BOTH);
-	WSACleanup();
 	closesocket(hostsocket);
 
 
@@ -190,7 +193,6 @@ int CheckEmuAcid::sendtoemu(SOCKET socket ,string accountbuff)
 			recv[i].pbuff = new uchar[ret];
 			recv[i].pBuf_len = ret;
 
-			//printf("i=%d\n", i);
 			memcpy(recv[i].pbuff, recvbuf, recv[i].pBuf_len);
 
 			cout << "接收到数据报:" << " 			        size(" << ret << ")" << endl;
@@ -216,7 +218,7 @@ int CheckEmuAcid::sendtoemu(SOCKET socket ,string accountbuff)
 				pOut.clear();
 				pOut.append((char*)sure,sizeof(sure));
 				intcrc = EQ::Crc32(pOut.c_str(), (int)pOut.size(), key) & 0xffff;
-				//htoncrc =EQ::Net::HostToNetwork((uint16_t)intcrc);
+
 				pOut += intcrc >> 8;
 				pOut += intcrc;
 				printf("intcrc:%d,key:%d\n", intcrc, key);
@@ -233,7 +235,7 @@ int CheckEmuAcid::sendtoemu(SOCKET socket ,string accountbuff)
 					pOut += accountbuff;
 
 					intcrc = EQ::Crc32(pOut.c_str(), (int)pOut.size(), key) & 0xffff;
-					//htoncrc =EQ::Net::HostToNetwork((uint16_t)intcrc);
+
 					pOut += intcrc >> 8;
 					pOut += intcrc;
 					emusendto((char*)pOut.c_str(), (int)pOut.size(), socket, addrSrv);
@@ -255,7 +257,6 @@ int CheckEmuAcid::sendtoemu(SOCKET socket ,string accountbuff)
 					pOut.clear();
 					pOut = outbuffer;
 					intcrc = EQ::Crc32(pOut.c_str(), (int)pOut.size(), key) & 0xffff;
-					//htoncrc =EQ::Net::HostToNetwork((uint16_t)intcrc);
 					pOut += intcrc >> 8;
 					pOut += intcrc;
 
@@ -559,6 +560,6 @@ string CheckEmuAcid::getaccount()
 		printf("Failed to decrypt eqcrypt block");
 		return 0;
 	}
-	
+
 	return accountbuf;
 }

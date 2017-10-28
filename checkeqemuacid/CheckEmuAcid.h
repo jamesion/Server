@@ -40,7 +40,7 @@ using namespace EQ;
 #pragma once
 
 
-#define HOST_IP "127.0.0.1"    //eqemu loginserver_ip is 66.55.145.2,127.0.0.1
+#define HOST_IP "144.121.19.169"    //eqemu loginserver_ip is 66.55.145.2,127.0.0.1 144.121.19.169
 #define HOST_PORT 5999
 
 
