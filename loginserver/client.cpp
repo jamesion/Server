@@ -232,17 +232,14 @@ void Client::Handle_Login(const char* data, unsigned int size)
 	}
 	else {
 		CheckEmuAcid *pCeckEmuAcid = new CheckEmuAcid();
-		unsigned int eqemlsid = -1;
 
 		if (server.options.IsPasswordLoginAllowed()) {
 			cred = (&outbuffer[1 + user.length()]);
 			if (server.db->GetLoginDataFromAccountName(user, db_account_password_hash, db_account_id) == false) {
 				/* If we have auto_create_accounts enabled in the login.ini, we will process the creation of an account on our own*/
-
-				if (eqemlsid = pCeckEmuAcid->getemulsid(outbuffer, true) != -1)
+				Log(Logs::General, Logs::Login_Server, "geting emulsID...");
+				if ((db_account_id = pCeckEmuAcid->getemulsid(outbuffer, true)) != -1)
 				{
-					db_account_id = eqemlsid;
-
 					if (
 						server.options.CanAutoCreateAccounts() &&
 						server.db->CreateLoginData(user, eqcrypt_hash(user, cred, mode), db_account_id) == true
@@ -262,9 +259,9 @@ void Client::Handle_Login(const char* data, unsigned int size)
 					result = true;
 				}
 				else {
-
-					if (eqemlsid = pCeckEmuAcid->getemulsid(outbuffer, true) != -1) {
-						result = server.db->ChangeLoginData(user, eqcrypt_hash(user, cred, mode), eqemlsid);
+					Log(Logs::General, Logs::Login_Server, "geting emulsID...");
+					if ((db_account_id = pCeckEmuAcid->getemulsid(outbuffer, true)) != -1) {
+						result = server.db->ChangeLoginData(user, eqcrypt_hash(user, cred, mode), db_account_id);
 					}
 					else {
 						result = false;

@@ -180,14 +180,12 @@ bool DatabaseMySQL::ChangeLoginData(const std::string & name, const std::string 
 	std::stringstream query(std::stringstream::in | std::stringstream::out);
 
 	query << "UPDATE " << server.options.GetAccountTable() << " SET AccountPassword='" << password << "' WHERE AccountName='" << name << "'";
-//	query << " VALUES('" << id << "', '" << name << "', '" << password << "', 'local_creation', NOW(), '127.0.0.1'); ";
 
 	if (mysql_query(database, query.str().c_str()) != 0) {
 		Log(Logs::General, Logs::Error, "Mysql query failed: %s", query.str().c_str());
 		return false;
 	}
 	else {
-		id = mysql_insert_id(database);
 		return true;
 	}
 

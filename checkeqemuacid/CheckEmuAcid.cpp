@@ -41,8 +41,6 @@ int32 CheckEmuAcid::getemulsid(string accountbuf,bool needcrypto)
 	//cout << "accout size:" << accountbuf.size() << endl;
 	//DumpPacketHex((uchar *)accountbuf.c_str(), (uint32)accountbuf.size());
 
-	printf("geting emulsID...\n");
-
 	acidbuf_id = sendtoemu(hostsocket,accountbuf);
 
 	if (recv[acidbuf_id].pBuf_len <= 0) 
@@ -73,7 +71,6 @@ int32 CheckEmuAcid::getemulsid(string accountbuf,bool needcrypto)
 
 	shutdown(hostsocket, SD_BOTH);
 	closesocket(hostsocket);
-
 	return aclsid;
 }
 
@@ -255,7 +252,7 @@ int CheckEmuAcid::sendtoemu(SOCKET socket ,string accountbuff)
 			now_time.wSecond += (now_time.wMinute - st.wMinute) * 60;
 		}
 
-		if ((now_time.wSecond - st.wSecond) >=10) 
+		if ((now_time.wSecond - st.wSecond) >= 5) 
 		{
 			//printf("最近一次获取数据包时间:%02d...当前时间%02d....", st.wSecond, now_time.wSecond);
 			printf("EqEmu超时退出进程.\n");
@@ -266,9 +263,6 @@ int CheckEmuAcid::sendtoemu(SOCKET socket ,string accountbuff)
 		
 			break;
 		}
-
-
-			Sleep(1000);
 		
 		}
 
