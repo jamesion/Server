@@ -63,6 +63,7 @@ public:
 
 	virtual bool CreateLoginData(const std::string &name, const std::string &password, unsigned int &id);
 
+	virtual bool ChangeLoginData(const std::string &name, const std::string &password, unsigned int &id);
 	/**
 	* Retrieves the world registration from the long and short names provided.
 	* Needed for world login procedure.

@@ -1,21 +1,20 @@
 #ifndef EQEMU_CACID_H
 #define EQEMU_CACID_H
 
-//#define _WINDOWS 1
+//#define WINDOWS 1
+#ifndef WIN64
+	#include "WinSock2.h"
+	#include "Windows.h"
+#endif WIN64
 
-#include "WinSock2.h"
 #include "iostream"
 #include "stdio.h"
-#include "Windows.h"
-//#include "../common/random.h"
 #include "../common/types.h"
 #include "encryption.h"
 #include "../common/net/crc32.h"
 #include "../common/net/daybreak_connection.h"
 
-#ifndef WIN32
-#include "../loginserver/eq_crypto_api.h"
-#endif
+
 #include <string>
 #pragma comment(lib, "ws2_32.lib")  
 
@@ -165,7 +164,7 @@ private:
 	uint32 cryptoidbuff(int acidbuf_id);
 	string getaccount(string account);
 	int emusendto(char*  send, int Size, SOCKET socket, SOCKADDR_IN addrSrv);
-	int CRCcheck(uchar* RecvBuff, int size);
+	//std::string descypto(string accountbuf, int size);
 };
 
-#endif
+#endif EQEMU_CACID_H

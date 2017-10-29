@@ -11,8 +11,6 @@ void main(string name, string password)
 
 	if (aclsid >= 0)
 	{
-		printf("acid:%d\n", aclsid);
-
 		delete checkid;
 	}
 

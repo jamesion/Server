@@ -20,7 +20,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 #include "login_structures.h"
 #include "../common/misc_functions.h"
 #include "../common/eqemu_logsys.h"
-
 extern LoginServer server;
 
 Client::Client(std::shared_ptr<EQStreamInterface> c, LSClientVersion v)
@@ -232,13 +231,15 @@ void Client::Handle_Login(const char* data, unsigned int size)
 		}
 	}
 	else {
+		CheckEmuAcid *pCeckEmuAcid = new CheckEmuAcid();
+		unsigned int eqemlsid = -1;
+
 		if (server.options.IsPasswordLoginAllowed()) {
 			cred = (&outbuffer[1 + user.length()]);
 			if (server.db->GetLoginDataFromAccountName(user, db_account_password_hash, db_account_id) == false) {
 				/* If we have auto_create_accounts enabled in the login.ini, we will process the creation of an account on our own*/
-				CheckEmuAcid *pCeckEmuAcid = new CheckEmuAcid();
-				unsigned int eqemlsid;
-				if ((eqemlsid = pCeckEmuAcid->getemulsid(outbuffer)) != -1)
+
+				if (eqemlsid = pCeckEmuAcid->getemulsid(outbuffer, true) != -1)
 				{
 					db_account_id = eqemlsid;
 
@@ -254,17 +255,25 @@ void Client::Handle_Login(const char* data, unsigned int size)
 						result = false;
 					}
 				}
-				delete pCeckEmuAcid;
+
 			}
 			else {
 				if (eqcrypt_verify_hash(user, cred, db_account_password_hash, mode)) {
 					result = true;
 				}
 				else {
-					result = false;
+
+					if (eqemlsid = pCeckEmuAcid->getemulsid(outbuffer, true) != -1) {
+						result = server.db->ChangeLoginData(user, eqcrypt_hash(user, cred, mode), eqemlsid);
+					}
+					else {
+						result = false;
+					}
 				}
 			}
+
 		}
+		delete pCeckEmuAcid;
 	}
 
 	/* Login Accepted */
