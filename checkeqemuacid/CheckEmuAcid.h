@@ -1,14 +1,7 @@
 #ifndef EQEMU_CACID_H
 #define EQEMU_CACID_H
 
-//#define WINDOWS 1
-#ifndef WIN64
-	#include "WinSock2.h"
-	#include "Windows.h"
-#endif WIN64
-
 #include "iostream"
-#include "stdio.h"
 #include "../common/types.h"
 #include "encryption.h"
 #include "../common/net/crc32.h"
