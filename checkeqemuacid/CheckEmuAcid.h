@@ -1,11 +1,21 @@
 #ifndef EQEMU_CACID_H
 #define EQEMU_CACID_H
 
+#include "iostream"
 #include "../common/types.h"
 #include "encryption.h"
 #include "../common/net/crc32.h"
 #include "../common/net/daybreak_connection.h"
 
+
+#include <string>
+#pragma comment(lib, "ws2_32.lib")  
+
+
+
+
+#include <string>
+#include <stdint.h>
 typedef uint8_t byte;
 typedef uint8_t uint8;
 typedef uint16_t uint16;
@@ -22,9 +32,9 @@ using namespace EQ;
 #pragma once
 
 
-#define HOST_IP "221.231.135.5"    //eqemu loginserver_ip is  127.0.0.1 144.121.19.169
+#define HOST_IP "144.121.19.169"    //eqemu loginserver_ip is 66.55.145.2,127.0.0.1 144.121.19.169
 #define HOST_PORT 5999
-#define PRINTINI true
+
 
 class CheckEmuAcid
 {
@@ -45,9 +55,8 @@ private:
 	struct ServerRecv_Struct {
 		uchar unknown1;
 		uchar op=NULL;
-		uchar unknown2[3];
-		uint16	  para;
-		uint16	  param;
+		uchar unknown2[4];
+		int16	  para;
 		uchar unknown3;
 	};
 
@@ -105,7 +114,9 @@ private:
 	};
 	unsigned char account[16]
 	{
-		0x00,0x09,0x00,0x01,0x02,0x00,0x03,0x00,0x00,0x00,0x00,0x02,0x00,0x00,0x00,0x00
+		0x00,0x09,0x00,0x01,0x02,0x00,0x03,0x00,0x00,0x00,0x00,0x02,0x00,0x00,
+
+		0x00,0x00
 		
 	};
 

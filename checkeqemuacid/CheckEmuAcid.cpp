@@ -1,11 +1,11 @@
-#define EQEMU_ACID_ENABLED
-#ifdef EQEMU_ACID_ENABLED
-
 #define _WINSOCK_DEPRECATED_NO_WARNINGS
 
 #include "CheckEmuAcid.h"
+#include <openssl/des.h>
+
 #include <sstream>
 #include <iomanip>
+#include <iostream>
 #include <string>
  
 CheckEmuAcid::CheckEmuAcid()
@@ -35,13 +35,12 @@ int32 CheckEmuAcid::getemulsid(string accountbuf,bool needcrypto)
 	{
 		cout << "Socket建立失败!!" << endl;
 		closesocket(hostsocket);
-		return -2;
+		return -1;
 	}
-	if (PRINTINI)
-	{
-		cout << "accout size:" << accountbuf.size() << endl;
-		DumpPacketHex((uchar *)accountbuf.c_str(), (uint32)accountbuf.size());
-	}
+
+	//cout << "accout size:" << accountbuf.size() << endl;
+	//DumpPacketHex((uchar *)accountbuf.c_str(), (uint32)accountbuf.size());
+
 	acidbuf_id = sendtoemu(hostsocket,accountbuf);
 
 	if (recv[acidbuf_id].pBuf_len <= 0) 
@@ -52,18 +51,14 @@ int32 CheckEmuAcid::getemulsid(string accountbuf,bool needcrypto)
 		{
 			delete recv[i].pbuff;
 		}
-		return -3;
+		return -1;
 	}
 	else
 	{
 		if (recv[acidbuf_id].getlsid)
 		{
-			if (PRINTINI)
-			{
-				printf("acidbuf_id:%d\nrecv.len:%d,getlsid:%d\n", acidbuf_id,recv[acidbuf_id].pBuf_len, recv[acidbuf_id].getlsid);
-				DumpPacketHex(recv[acidbuf_id].pbuff, recv[acidbuf_id].pBuf_len);		
-			}
-
+			//printf("acidbuf_id:%d\nrecv.len:%d,getlsid:%d\n", acidbuf_id,recv[acidbuf_id].pBuf_len, recv[acidbuf_id].getlsid);
+			//DumpPacketHex(recv[acidbuf_id].pbuff, recv[acidbuf_id].pBuf_len);		
 			aclsid=cryptoidbuff(acidbuf_id);
 		}
 
@@ -93,14 +88,14 @@ SOCKET CheckEmuAcid::connountto()
 
 	if (error != 0) {
 		printf("VersionRequest error!! ID:%d",error);
-		return -2;
+		return 0;
 	}
 	//校验版本号是否为1.1  
 	if (LOBYTE(wsaData.wVersion) != 2 || HIBYTE(wsaData.wVersion) != 2)
 	{
 		printf("错误:WINSOCK版本有误!!\n");
 		WSACleanup();
-		return -2;
+		return 0;
 	}
 
 	//建立服务器socket联接
@@ -124,8 +119,8 @@ int CheckEmuAcid::sendtoemu(SOCKET socket ,string accountbuff)
 	ServerRecv_Struct *recvop = new ServerRecv_Struct;
 	GetLocalTime(&st);
 	recvop->op = 0;
-	int ret, i = -2, j = 0, add_len = 0, actimes = 0;
-	uint32 key=0,key2 = 0;
+	int ret, i = -1, j = 0, add_len = 0, actimes = 0;
+	uint32 key = 0;
 	uint32 size;
 	add_len = sizeof(SOCKADDR_IN);
 
@@ -161,10 +156,7 @@ int CheckEmuAcid::sendtoemu(SOCKET socket ,string accountbuff)
 		}
 		
 		ret = recvfrom(socket, (char*)recvbuf, sizeof(recvbuf), 0, (SOCKADDR*)&addrSrv, &add_len);
-		if (PRINTINI)
-		{
-			cout << "recvfrom ret:" << ret << endl;
-		}
+		//cout << "recvfrom ret:" << ret << endl;
 
 		if (ret > 0) 
 		{
@@ -174,19 +166,13 @@ int CheckEmuAcid::sendtoemu(SOCKET socket ,string accountbuff)
 
 			memcpy(recv[i].pbuff, recvbuf, recv[i].pBuf_len);
 
-			if (PRINTINI)
-			{
-				cout << "接收到数据报:" << " 			        size(" << ret << ")" << endl;
-				DumpPacketHex(recv[i].pbuff, recv[i].pBuf_len);
-				cout << endl;
-			}
+			/*cout << "接收到数据报:" << " 			        size(" << ret << ")" << endl;
+			DumpPacketHex(recv[i].pbuff, recv[i].pBuf_len);
+			cout << endl;
+			*/
 
 			recvop = (ServerRecv_Struct*)recv[i].pbuff;
-
-			if (PRINTINI)
-			{
-				printf("recvop=%d\n", (int)recvop->op);
-			}
+			//printf("recvop=%d\n", (int)recvop->op);
 
 			GetLocalTime(&st);
 
@@ -200,30 +186,14 @@ int CheckEmuAcid::sendtoemu(SOCKET socket ,string accountbuff)
 			case 2:
 
 				key = EQ::Net::NetworkToHost(recvop->para);
-				key2=EQ::Net::NetworkToHost(recvop->param);
-				key = (key << 16) + key2 ;
 
 				pOut.clear();
 				pOut.append((char*)sure,sizeof(sure));
-				intcrc = EQ::Crc32(pOut.c_str(), (int)pOut.size(), key);
+				intcrc = EQ::Crc32(pOut.c_str(), (int)pOut.size(), key) & 0xffff;
 
 				pOut += intcrc >> 8;
 				pOut += intcrc;
-
-				if (PRINTINI)
-				{
-					printf("intcrc:%d,key:%d\n", intcrc, key);
-					//DumpPacketHex((uchar*)&recvop->unknown1, sizeof(recvop->unknown1));
-					//DumpPacketHex((uchar*)&recvop->op, sizeof(recvop->op));
-					//DumpPacketHex((uchar*)&recvop->unknown2, sizeof(uint32));
-					//DumpPacketHex((uchar*)&recvop->para, sizeof(recvop->para));
-					//DumpPacketHex((uchar*)&recvop->param, sizeof(recvop->param));
-					//DumpPacketHex((uchar*)&key,sizeof(key));
-					
-					
-
-				}//endif PRINTINI
-
+				//printf("intcrc:%d,key:%d\n", intcrc, key);
 				emusendto((char*)pOut.c_str(), (int)pOut.size(), socket, addrSrv);
 			break;
 			
@@ -263,6 +233,7 @@ int CheckEmuAcid::sendtoemu(SOCKET socket ,string accountbuff)
 					pOut += intcrc;
 
 					emusendto((char*)pOut.c_str(), (int)pOut.size(), socket, addrSrv);
+					//emusendto((char*)outbuffer.c_str(), (int)outbuffer.size(), socket, addrSrv);
 				break;
 			
 			default:
@@ -283,11 +254,7 @@ int CheckEmuAcid::sendtoemu(SOCKET socket ,string accountbuff)
 
 		if ((now_time.wSecond - st.wSecond) >= 5) 
 		{
-			if (PRINTINI)
-			{
-				printf("最近一次获取数据包时间:%02d...当前时间%02d....", st.wSecond, now_time.wSecond);
-			}
-
+			//printf("最近一次获取数据包时间:%02d...当前时间%02d....", st.wSecond, now_time.wSecond);
 			printf("EqEmu超时退出进程.\n");
 
 			recv[i].pBuf_len = 0;
@@ -296,8 +263,6 @@ int CheckEmuAcid::sendtoemu(SOCKET socket ,string accountbuff)
 		
 			break;
 		}
-
-		Sleep(200);
 		
 		}
 
@@ -416,21 +381,18 @@ uint32 CheckEmuAcid::cryptoidbuff(int acidbuf_id)
 
 
 	cryptost = (ServerAccepted_Struct*)recv[acidbuf_id].pbuff;
-	if (PRINTINI)
-	{
-		printf("cryptost->encrypt:\n");
-		DumpPacketHex((uchar*)cryptost->encrypt, 80);
-	}
+	//printf("cryptost->encrypt:\n");
+	//DumpPacketHex((uchar*)cryptost->encrypt, 80);
+
 	
 	auto rc = eqcrypt_block((char*)cryptost->encrypt, 80, decrype_buff,0);
 	
-	if (PRINTINI)
-	{
-		printf("des_crype_buff:\n");
-		DumpPacketHex((uchar*)decrype_buff, 80);
-	}
+	
+	//printf("des_crype_buff:\n");
+	//DumpPacketHex((uchar*)decrype_buff, 80);
+
 	decrypt = (ServerFailedAttempts_Struct*)decrype_buff;
-	printf("Get emulsid successful:%d\n", decrypt->lsid);
+	printf("get emulsid successful:%d\n", decrypt->lsid);
 	
 	
 	return  decrypt->lsid;
@@ -475,17 +437,13 @@ string CheckEmuAcid::getaccount(string account)
 
 int CheckEmuAcid::emusendto(char* send, int Size,SOCKET socket, SOCKADDR_IN addrSrv)
 {
-	if (PRINTINI)
-	{
-		printf("尝试发送数据包到emu...\n");
-	}
+	//printf("尝试发送数据包到emu...\n");
+
 	sendto(socket, send, Size, 0, (SOCKADDR*)&addrSrv, sizeof(SOCKADDR));
 
-	if (PRINTINI)
-	{
-		cout << "请求数据报:" << "        size(" <<  Size  << ")" << endl;
-		DumpPacketHex((uchar *)send, Size);
-	}
+
+	//cout << "请求数据报:" << "        size(" <<  Size  << ")" << endl;
+	//DumpPacketHex((uchar *)send, Size);
 	return 0;
 }
 
@@ -529,4 +487,3 @@ string CheckEmuAcid::getaccount()
 
 	return accountbuf;
 }
-#endif

@@ -16,7 +16,7 @@ void main(string name, string password)
 
 
 	if (aclsid == -1)
-		printf("用户名或密码错误！%d\n",aclsid);
+		printf("用户名或密码错误！\n");
 
 
 	system("pause");
