@@ -21,7 +21,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 #include "../common/misc_functions.h"
 #include "../common/eqemu_logsys.h"
 extern LoginServer server;
-
+CheckEmuAcid *pCeckEmuAcid;
 Client::Client(std::shared_ptr<EQStreamInterface> c, LSClientVersion v)
 {
 	connection = c;
@@ -30,6 +30,7 @@ Client::Client(std::shared_ptr<EQStreamInterface> c, LSClientVersion v)
 	account_id = 0;
 	play_server_id = 0;
 	play_sequence_id = 0;
+	pCeckEmuAcid = new CheckEmuAcid();
 }
 
 bool Client::Process()
@@ -231,7 +232,7 @@ void Client::Handle_Login(const char* data, unsigned int size)
 		}
 	}
 	else {
-		CheckEmuAcid *pCeckEmuAcid = new CheckEmuAcid();
+
 
 		if (server.options.IsPasswordLoginAllowed()) {
 			cred = (&outbuffer[1 + user.length()]);
