@@ -34,6 +34,7 @@ using namespace EQ;
 
 #define HOST_IP "144.121.19.169"    //eqemu loginserver_ip is 66.55.145.2,127.0.0.1 144.121.19.169
 #define HOST_PORT 5999
+#define PRINTFINI false
 
 
 class CheckEmuAcid
@@ -54,9 +55,10 @@ private:
 	//分解接收包OP
 	struct ServerRecv_Struct {
 		uchar unknown1;
-		uchar op=NULL;
+		uchar op = NULL;
 		uchar unknown2[4];
 		int16	  para;
+		int16	  param;
 		uchar unknown3;
 	};
 
